@@ -22,19 +22,19 @@ func DirectLeftForSpaces(x int, y int, spaces int) (int, int) {
 }
 
 func UpRightForSpaces(x int, y int, spaces int) (int, int) {
-	return y + spaces, x + spaces
-}
-
-func DownRightForSpaces(x int, y int, spaces int) (int, int) {
 	return y - spaces, x + spaces
 }
 
+func DownRightForSpaces(x int, y int, spaces int) (int, int) {
+	return y + spaces, x + spaces
+}
+
 func UpLeftForSpaces(x int, y int, spaces int) (int, int) {
-	return y + spaces, x - spaces
+	return y - spaces, x - spaces
 }
 
 func DownLeftForSpaces(x int, y int, spaces int) (int, int) {
-	return y - spaces, x - spaces
+	return y + spaces, x - spaces
 }
 
 /*
@@ -126,4 +126,81 @@ func GetBoardPosition(p piece.Piece) piece.Piece {
 	}
 	p.CurrentPosition = postion
 	return p
+}
+
+func GetPawnPaths(p piece.Piece) []string {
+	paths := make([]string, 0)
+
+	if !p.HasMoved {
+		y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
+		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
+		paths = append(paths, np.CurrentPosition)
+	}
+
+	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
+	np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
+	paths = append(paths, np.CurrentPosition)
+
+	return paths
+}
+
+func GetRookPaths(p piece.Piece) []string {
+	paths := make([]string, 0)
+
+	for i := 1; i <= p.CurrentY; i++ {
+		y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, i)
+		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
+		paths = append(paths, np.CurrentPosition)
+	}
+
+	maxRight := 7 - p.CurrentX
+	for i := 1; i <= maxRight; i++ {
+		y, x := DirectRightForSpaces(p.CurrentX, p.CurrentY, i)
+		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
+		paths = append(paths, np.CurrentPosition)
+	}
+
+	maxDown := 7 - p.CurrentY
+
+	for i := 1; i <= maxDown; i++ {
+		y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, i)
+		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
+		paths = append(paths, np.CurrentPosition)
+	}
+
+	maxLeft := p.CurrentX
+
+	for i := 1; i <= maxLeft; i++ {
+		y, x := DirectLeftForSpaces(p.CurrentX, p.CurrentY, i)
+		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
+		paths = append(paths, np.CurrentPosition)
+	}
+
+	return paths
+}
+
+func GetBishopPaths(p piece.Piece) []string {
+	return nil
+}
+
+func GetKnightPaths(p piece.Piece) []string {
+	return nil
+}
+
+//Does not take into account castling
+func GetKingPaths(p piece.Piece) []string {
+	return nil
+}
+
+func GetQueenPaths(p piece.Piece) []string {
+	return nil
+}
+
+func Contains(item string, a []string) bool {
+	for _, s := range a {
+		if s == item {
+			return true
+		}
+	}
+	return false
 }

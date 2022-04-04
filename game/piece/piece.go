@@ -7,6 +7,7 @@ type Piece struct {
 	CurrentPosition string
 	CurrentY        int
 	CurrentX        int
+	HasMoved        bool
 	PossibleMoves   []string
 }
 
