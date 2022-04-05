@@ -216,15 +216,134 @@ func TestGetRookPaths(t *testing.T) {
 	assert.True(t, Contains("a4", paths))
 }
 
+func TestGetKingPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetKingPaths(np)
+	assert.Equal(t, 8, len(paths))
+}
+
+func TestGetQueenPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetQueenPaths(np)
+	assert.Equal(t, 27, len(paths))
+}
+
 func TestGetBishopPaths(t *testing.T) {
 	p := piece.Piece{
-		Name:            constants.BLACK_ROOK,
+		Name:            constants.WHITE_BISHOP,
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
 	np := GetCoordinates(p)
 	paths := GetBishopPaths(np)
 	assert.Equal(t, 13, len(paths))
+}
+
+func TestGetDirectUpPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetDirectUpPaths(np)
+	assert.Equal(t, 4, len(paths))
+	assert.True(t, Contains("d8", paths))
+}
+
+func TestGetUpRightPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetUpRightPaths(np)
+	assert.Equal(t, 4, len(paths))
+	assert.True(t, Contains("g7", paths))
+
+}
+
+func TestGetRightPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetRightPaths(np)
+	assert.Equal(t, 4, len(paths))
+	assert.True(t, Contains("h4", paths))
+}
+
+func TestGetDownRightPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetDownRightPaths(np)
+	assert.Equal(t, 3, len(paths))
+	assert.True(t, Contains("g1", paths))
+
+}
+
+func TestGetDownPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetDownPaths(np)
+	assert.Equal(t, 3, len(paths))
+	assert.True(t, Contains("d1", paths))
+}
+
+func TestGetDownLeftPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetDownLeftPaths(np)
+	assert.Equal(t, 3, len(paths))
+}
+
+func TestGetLeftPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetLeftPaths(np)
+	assert.Equal(t, 3, len(paths))
+	assert.True(t, Contains("a4", paths))
+}
+
+func TestGetUpLeftPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetUpLeftPaths(np)
+	assert.Equal(t, 3, len(paths))
+	assert.True(t, Contains("a7", paths))
 }
 
 //
@@ -239,24 +358,3 @@ func TestGetBishopPaths(t *testing.T) {
 //	assert.Equal(t, 16, len(paths))
 //}
 //
-//func TestGetKingPaths(t *testing.T) {
-//	p := piece.Piece{
-//		Name:            constants.BLACK_KNIGHT,
-//		CurrentPosition: "d4",
-//		HasMoved:        true,
-//	}
-//	np := GetCoordinates(p)
-//	paths := GetRookPaths(np)
-//	assert.Equal(t, 8, len(paths))
-//}
-//
-//func TestGetQueenPaths(t *testing.T) {
-//	p := piece.Piece{
-//		Name:            constants.WHITE_QUEEN,
-//		CurrentPosition: "d4",
-//		HasMoved:        true,
-//	}
-//	np := GetCoordinates(p)
-//	paths := GetRookPaths(np)
-//	assert.Equal(t, 24, len(paths))
-//}
