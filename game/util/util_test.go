@@ -346,15 +346,189 @@ func TestGetUpLeftPaths(t *testing.T) {
 	assert.True(t, Contains("a7", paths))
 }
 
-//
-//func TestGetKnightPaths(t *testing.T) {
-//	p := piece.Piece{
-//		Name:            constants.BLACK_KNIGHT,
-//		CurrentPosition: "d4",
-//		HasMoved:        true,
-//	}
-//	np := GetCoordinates(p)
-//	paths := GetRookPaths(np)
-//	assert.Equal(t, 16, len(paths))
-//}
-//
+func TestUpBigLeftL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := UpBigLeftL(np)
+	assert.Equal(t, "c6", s)
+}
+
+func TestUpBigRightL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := UpBigRightL(np)
+	assert.Equal(t, "e6", s)
+}
+
+func TestUpSmallLeftL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := UpSmallLeftL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestUpSmallRightL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := UpSmallRightL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestRightBigUpL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := RightBigUpL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestRightBigDownL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := RightBigDownL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestRightSmallUpL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := RightSmallUpL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestRightSmallDownL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := RightSmallDownL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestDownBigUpL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := DownBigUpL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestDownBigDownL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := DownBigDownL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestDownSmallUpL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := DownSmallUpL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestDownSmallDownL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := DownSmallDownL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestLeftBigUpL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := LeftBigUpL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestLeftBigDownL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := LeftBigDownL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestLeftSmallUpL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := LeftSmallUpL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestLeftSmallDownL(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	s := LeftSmallDownL(np)
+	assert.Equal(t, "b5", s)
+}
+
+func TestGetKnightPaths(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetKnightPaths(np)
+	assert.Equal(t, 16, len(paths))
+}

@@ -1,6 +1,7 @@
 package util
 
 import (
+	"go_chess/game/constants"
 	"go_chess/game/piece"
 	"strings"
 )
@@ -386,7 +387,89 @@ func GetBishopPaths(p piece.Piece) []string {
 }
 
 func GetKnightPaths(p piece.Piece) []string {
-	return nil
+	paths := make([]string, 0)
+
+	return paths
+}
+
+//***
+func UpBigLeftL(p piece.Piece) string {
+	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
+	y, x = DirectLeftForSpaces(x, y, 1)
+	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+	return GetBoardPosition(np).CurrentPosition
+}
+
+func UpBigRightL(p piece.Piece) string {
+	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
+	y, x = DirectRightForSpaces(x, y, 1)
+	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+	return GetBoardPosition(np).CurrentPosition
+}
+
+func UpSmallLeftL(p piece.Piece) string {
+	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
+	y, x = DirectLeftForSpaces(x, y, 2)
+	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+	return GetBoardPosition(np).CurrentPosition
+}
+
+func UpSmallRightL(p piece.Piece) string {
+	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
+	y, x = DirectLeftForSpaces(x, y, 2)
+	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+	return GetBoardPosition(np).CurrentPosition
+}
+
+//***
+func RightBigUpL(p piece.Piece) string {
+	return ""
+}
+
+func RightBigDownL(p piece.Piece) string {
+	return ""
+}
+
+func RightSmallUpL(p piece.Piece) string {
+	return ""
+}
+
+func RightSmallDownL(p piece.Piece) string {
+	return ""
+}
+
+//***
+func DownBigUpL(p piece.Piece) string {
+	return ""
+}
+
+func DownBigDownL(p piece.Piece) string {
+	return ""
+}
+
+func DownSmallUpL(p piece.Piece) string {
+	return ""
+}
+
+func DownSmallDownL(p piece.Piece) string {
+	return ""
+}
+
+//***
+func LeftBigUpL(p piece.Piece) string {
+	return ""
+}
+
+func LeftBigDownL(p piece.Piece) string {
+	return ""
+}
+
+func LeftSmallUpL(p piece.Piece) string {
+	return ""
+}
+
+func LeftSmallDownL(p piece.Piece) string {
+	return ""
 }
 
 func Contains(item string, a []string) bool {
