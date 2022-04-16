@@ -267,10 +267,12 @@ func GetDirectUpPaths(p piece.Piece) []string {
 	for i := 1; i <= upMax; i++ {
 		np := GetCoordinates(p)
 		y, x := DirectUpForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -287,10 +289,12 @@ func GetUpRightPaths(p piece.Piece) []string {
 	for i := 1; i <= upRightMax; i++ {
 		np := GetCoordinates(p)
 		y, x := UpRightForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -302,10 +306,12 @@ func GetRightPaths(p piece.Piece) []string {
 	for i := 1; i <= rightMax; i++ {
 		np := GetCoordinates(p)
 		y, x := DirectRightForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -323,10 +329,12 @@ func GetDownRightPaths(p piece.Piece) []string {
 	for i := 1; i <= downRightMax; i++ {
 		np := GetCoordinates(p)
 		y, x := DownRightForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -339,10 +347,12 @@ func GetDownPaths(p piece.Piece) []string {
 	for i := 1; i <= downMax; i++ {
 		np := GetCoordinates(p)
 		y, x := DirectDownForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -360,10 +370,12 @@ func GetDownLeftPaths(p piece.Piece) []string {
 	for i := 1; i <= downLeftMax; i++ {
 		np := GetCoordinates(p)
 		y, x := DownLeftForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -376,10 +388,12 @@ func GetLeftPaths(p piece.Piece) []string {
 	for i := 1; i <= leftMax; i++ {
 		np := GetCoordinates(p)
 		y, x := DirectLeftForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
@@ -397,10 +411,12 @@ func GetUpLeftPaths(p piece.Piece) []string {
 	for i := 1; i <= upLeftMax; i++ {
 		np := GetCoordinates(p)
 		y, x := UpLeftForSpaces(np.CurrentX, np.CurrentY, i)
-		np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
-		np = GetBoardPosition(np)
-		pos := np.CurrentPosition
-		paths = append(paths, pos)
+		if IsInbounds(x, y) {
+			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
+			np = GetBoardPosition(np)
+			pos := np.CurrentPosition
+			paths = append(paths, pos)
+		}
 	}
 	return paths
 }
