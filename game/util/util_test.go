@@ -354,7 +354,7 @@ func TestUpBigLeftL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := UpBigLeftL(np)
-	assert.Equal(t, "c6", s)
+	assert.Equal(t, "c6", s[0])
 }
 
 func TestUpBigRightL(t *testing.T) {
@@ -365,7 +365,7 @@ func TestUpBigRightL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := UpBigRightL(np)
-	assert.Equal(t, "e6", s)
+	assert.Equal(t, "e6", s[0])
 }
 
 func TestUpSmallLeftL(t *testing.T) {
@@ -376,7 +376,7 @@ func TestUpSmallLeftL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := UpSmallLeftL(np)
-	assert.Equal(t, "b5", s)
+	assert.Equal(t, "b5", s[0])
 }
 
 func TestUpSmallRightL(t *testing.T) {
@@ -387,7 +387,7 @@ func TestUpSmallRightL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := UpSmallRightL(np)
-	assert.Equal(t, "b5", s)
+	assert.Equal(t, "b5", s[0])
 }
 
 func TestRightBigUpL(t *testing.T) {
@@ -398,7 +398,7 @@ func TestRightBigUpL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := RightBigUpL(np)
-	assert.Equal(t, "e6", s)
+	assert.Equal(t, "e6", s[0])
 }
 
 func TestRightBigDownL(t *testing.T) {
@@ -409,7 +409,7 @@ func TestRightBigDownL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := RightBigDownL(np)
-	assert.Equal(t, "e2", s)
+	assert.Equal(t, "e2", s[0])
 }
 
 func TestRightSmallUpL(t *testing.T) {
@@ -420,7 +420,7 @@ func TestRightSmallUpL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := RightSmallUpL(np)
-	assert.Equal(t, "f5", s)
+	assert.Equal(t, "f5", s[0])
 }
 
 func TestRightSmallDownL(t *testing.T) {
@@ -431,7 +431,7 @@ func TestRightSmallDownL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := RightSmallDownL(np)
-	assert.Equal(t, "f3", s)
+	assert.Equal(t, "f3", s[0])
 }
 
 func TestDownBigLeftL(t *testing.T) {
@@ -442,7 +442,7 @@ func TestDownBigLeftL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := DownBigLeftL(np)
-	assert.Equal(t, "c2", s)
+	assert.Equal(t, "c2", s[0])
 }
 
 func TestDownBigRightL(t *testing.T) {
@@ -453,7 +453,7 @@ func TestDownBigRightL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := DownBigRightL(np)
-	assert.Equal(t, "e2", s)
+	assert.Equal(t, "e2", s[0])
 }
 
 func TestDownSmallLeftL(t *testing.T) {
@@ -464,7 +464,7 @@ func TestDownSmallLeftL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := DownSmallLeftL(np)
-	assert.Equal(t, "b3", s)
+	assert.Equal(t, "b3", s[0])
 }
 
 func TestDownSmallRightL(t *testing.T) {
@@ -475,7 +475,7 @@ func TestDownSmallRightL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := DownSmallRightL(np)
-	assert.Equal(t, "f3", s)
+	assert.Equal(t, "f3", s[0])
 }
 
 func TestLeftBigUpL(t *testing.T) {
@@ -486,7 +486,7 @@ func TestLeftBigUpL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := LeftBigUpL(np)
-	assert.Equal(t, "b5", s)
+	assert.Equal(t, "b5", s[0])
 }
 
 func TestLeftBigDownL(t *testing.T) {
@@ -497,7 +497,7 @@ func TestLeftBigDownL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := LeftBigDownL(np)
-	assert.Equal(t, "b3", s)
+	assert.Equal(t, "b3", s[0])
 }
 
 func TestLeftSmallUpL(t *testing.T) {
@@ -508,7 +508,7 @@ func TestLeftSmallUpL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := LeftSmallUpL(np)
-	assert.Equal(t, "c6", s)
+	assert.Equal(t, "c6", s[0])
 }
 
 func TestLeftSmallDownL(t *testing.T) {
@@ -519,7 +519,7 @@ func TestLeftSmallDownL(t *testing.T) {
 	}
 	np := GetCoordinates(p)
 	s := LeftSmallDownL(np)
-	assert.Equal(t, "c2", s)
+	assert.Equal(t, "c2", s[0])
 }
 
 func TestGetKnightPaths(t *testing.T) {
@@ -531,6 +531,17 @@ func TestGetKnightPaths(t *testing.T) {
 	np := GetCoordinates(p)
 	paths := GetKnightPaths(np)
 	assert.Equal(t, 16, len(paths))
+}
+
+func TestGetKnightPathsWithSomeInvalid(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "g6",
+		HasMoved:        true,
+	}
+	np := GetCoordinates(p)
+	paths := GetKnightPaths(np)
+	assert.Equal(t, 13, len(paths))
 }
 
 func TestIsInBounds(t *testing.T) {

@@ -432,139 +432,203 @@ func GetBishopPaths(p piece.Piece) []string {
 
 func GetKnightPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
-	paths = append(paths, UpBigLeftL(p))
-	paths = append(paths, UpBigRightL(p))
-	paths = append(paths, UpSmallLeftL(p))
-	paths = append(paths, UpSmallRightL(p))
-	paths = append(paths, RightBigUpL(p))
-	paths = append(paths, RightBigDownL(p))
-	paths = append(paths, RightSmallUpL(p))
-	paths = append(paths, RightSmallDownL(p))
-	paths = append(paths, DownBigLeftL(p))
-	paths = append(paths, DownBigRightL(p))
-	paths = append(paths, DownSmallLeftL(p))
-	paths = append(paths, DownSmallRightL(p))
-	paths = append(paths, LeftBigUpL(p))
-	paths = append(paths, LeftBigDownL(p))
-	paths = append(paths, LeftSmallUpL(p))
-	paths = append(paths, LeftSmallDownL(p))
+	paths = append(paths, UpBigLeftL(p)...)
+	paths = append(paths, UpBigRightL(p)...)
+	paths = append(paths, UpSmallLeftL(p)...)
+	paths = append(paths, UpSmallRightL(p)...)
+	paths = append(paths, RightBigUpL(p)...)
+	paths = append(paths, RightBigDownL(p)...)
+	paths = append(paths, RightSmallUpL(p)...)
+	paths = append(paths, RightSmallDownL(p)...)
+	paths = append(paths, DownBigLeftL(p)...)
+	paths = append(paths, DownBigRightL(p)...)
+	paths = append(paths, DownSmallLeftL(p)...)
+	paths = append(paths, DownSmallRightL(p)...)
+	paths = append(paths, LeftBigUpL(p)...)
+	paths = append(paths, LeftBigDownL(p)...)
+	paths = append(paths, LeftSmallUpL(p)...)
+	paths = append(paths, LeftSmallDownL(p)...)
 	return paths
 }
 
 //***
-func UpBigLeftL(p piece.Piece) string {
+func UpBigLeftL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func UpBigRightL(p piece.Piece) string {
+func UpBigRightL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func UpSmallLeftL(p piece.Piece) string {
+func UpSmallLeftL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func UpSmallRightL(p piece.Piece) string {
+func UpSmallRightL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
 //***
-func RightBigUpL(p piece.Piece) string {
+func RightBigUpL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func RightBigDownL(p piece.Piece) string {
+func RightBigDownL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func RightSmallUpL(p piece.Piece) string {
+func RightSmallUpL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectRightForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func RightSmallDownL(p piece.Piece) string {
+func RightSmallDownL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectRightForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
 //***
-func DownBigLeftL(p piece.Piece) string {
+func DownBigLeftL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func DownBigRightL(p piece.Piece) string {
+func DownBigRightL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func DownSmallLeftL(p piece.Piece) string {
+func DownSmallLeftL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func DownSmallRightL(p piece.Piece) string {
+func DownSmallRightL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectRightForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
 //***
-func LeftBigUpL(p piece.Piece) string {
+func LeftBigUpL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func LeftBigDownL(p piece.Piece) string {
+func LeftBigDownL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func LeftSmallUpL(p piece.Piece) string {
+func LeftSmallUpL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
-func LeftSmallDownL(p piece.Piece) string {
+func LeftSmallDownL(p piece.Piece) []string {
+	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
-	return GetBoardPosition(np).CurrentPosition
+	if IsInbounds(x, y) {
+		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
+		paths = append(paths, GetBoardPosition(np).CurrentPosition)
+	}
+	return paths
 }
 
 func IsInbounds(x int, y int) bool {
