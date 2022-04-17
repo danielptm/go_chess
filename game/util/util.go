@@ -398,6 +398,8 @@ func GetLeftPaths(p piece.Piece) []string {
 	return paths
 }
 
+//TODO: Take the board as another param. Search up the board until it finds
+// a piece if it finds a piece then some there for that line.
 func GetUpLeftPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 
