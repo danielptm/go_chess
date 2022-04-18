@@ -53,6 +53,20 @@ func (g Game) InitializeBoard() Game {
 	return g
 }
 
+func (g Game) InitializeEmptyBoard() Game {
+	g.Board = [8][8]piece.Piece{
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+	}
+	return g
+}
+
 func (g Game) PrintBoard() {
 	fmt.Println("***********   NEXT TURN   ***********")
 	for i := 0; i < 8; i++ {

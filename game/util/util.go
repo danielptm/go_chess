@@ -1,6 +1,7 @@
 package util
 
 import (
+	"go_chess/game/board"
 	"go_chess/game/constants"
 	"go_chess/game/piece"
 	"strings"
@@ -631,6 +632,14 @@ func LeftSmallDownL(p piece.Piece) []string {
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
+}
+
+func PlacePiece(p piece.Piece, pos string, g board.Game) board.Game {
+	p.CurrentPosition = pos
+	np := GetCoordinates(p)
+	np = GetBoardPosition(np)
+	g.Board[np.CurrentY][np.CurrentX] = np
+	return g
 }
 
 func IsInbounds(x int, y int) bool {
