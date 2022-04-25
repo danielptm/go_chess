@@ -261,6 +261,11 @@ func GetQueenPaths(p piece.Piece) []string {
 	return paths
 }
 
+//TODO: Take the board as another param. Search up the board
+// and find all paths. The furthest path is either the edge of the board
+// or a piece. If the encountered piece is a different suit, then it
+// returns that coordinate as a path. If it is the same suit, then it does
+// it does not include it
 func GetDirectUpPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 	upMax := p.CurrentY
@@ -399,8 +404,6 @@ func GetLeftPaths(p piece.Piece) []string {
 	return paths
 }
 
-//TODO: Take the board as another param. Search up the board until it finds
-// a piece if it finds a piece then some there for that line.
 func GetUpLeftPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 
