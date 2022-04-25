@@ -10,7 +10,6 @@ type Game struct {
 	Board [8][8]piece.Piece
 }
 
-//TODO: Finish creating board
 func (g Game) InitializeBoard() Game {
 	g.Board = [8][8]piece.Piece{
 		{piece.Piece{Name: constants.BLACK_ROOK, CurrentPosition: "a8"},
