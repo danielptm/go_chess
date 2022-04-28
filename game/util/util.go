@@ -266,6 +266,7 @@ func GetQueenPaths(p piece.Piece) []string {
 // or a piece. If the encountered piece is a different suit, then it
 // returns that coordinate as a path. If it is the same suit, then it does
 // it does not include it
+// Do this for all of the GetPaths functions
 func GetDirectUpPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 	upMax := p.CurrentY
