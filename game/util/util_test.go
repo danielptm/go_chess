@@ -235,7 +235,8 @@ func TestGetQueenPaths(t *testing.T) {
 		HasMoved:        true,
 	}
 	np := GetCoordinates(p)
-	paths := GetQueenPaths(np)
+	g := board.Game{}.InitializeEmptyBoard()
+	paths := GetQueenPaths(np, g)
 	assert.Equal(t, 27, len(paths))
 }
 
@@ -256,10 +257,30 @@ func TestGetDirectUpPaths(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
+	p2 := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	g := board.Game{}.InitializeEmptyBoard()
+	g = PlacePiece(p2, "d7", g)
 	np := GetCoordinates(p)
-	paths := GetDirectUpPaths(np)
+	paths := GetDirectUpPaths(np, g)
+	assert.Equal(t, 3, len(paths))
+	assert.True(t, Contains("d7", paths))
+}
+
+func TestGetDirectUpPaths2(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	g := board.Game{}.InitializeEmptyBoard()
+	np := GetCoordinates(p)
+	paths := GetDirectUpPaths(np, g)
 	assert.Equal(t, 4, len(paths))
-	assert.True(t, Contains("d8", paths))
+	assert.True(t, Contains("d7", paths))
 }
 
 func TestGetUpRightPaths(t *testing.T) {

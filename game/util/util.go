@@ -248,9 +248,9 @@ func GetKingPaths(p piece.Piece) []string {
 	return paths
 }
 
-func GetQueenPaths(p piece.Piece) []string {
+func GetQueenPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
-	paths = append(paths, GetDirectUpPaths(p)...)
+	paths = append(paths, GetDirectUpPaths(p, b)...)
 	paths = append(paths, GetUpRightPaths(p)...)
 	paths = append(paths, GetRightPaths(p)...)
 	paths = append(paths, GetDownRightPaths(p)...)
@@ -267,7 +267,7 @@ func GetQueenPaths(p piece.Piece) []string {
 // returns that coordinate as a path. If it is the same suit, then it does
 // it does not include it
 // Do this for all of the GetPaths functions
-func GetDirectUpPaths(p piece.Piece) []string {
+func GetDirectUpPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	upMax := p.CurrentY
 
@@ -279,6 +279,9 @@ func GetDirectUpPaths(p piece.Piece) []string {
 			np = GetBoardPosition(np)
 			pos := np.CurrentPosition
 			paths = append(paths, pos)
+			if b.Board[y][x].Name != "" {
+				break
+			}
 		}
 	}
 	return paths
