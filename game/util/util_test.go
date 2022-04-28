@@ -246,8 +246,10 @@ func TestGetBishopPaths(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
+	g := board.Game{}.InitializeEmptyBoard()
+
 	np := GetCoordinates(p)
-	paths := GetBishopPaths(np)
+	paths := GetBishopPaths(np, g)
 	assert.Equal(t, 13, len(paths))
 }
 
@@ -280,7 +282,25 @@ func TestGetDirectUpPaths2(t *testing.T) {
 	np := GetCoordinates(p)
 	paths := GetDirectUpPaths(np, g)
 	assert.Equal(t, 4, len(paths))
-	assert.True(t, Contains("d7", paths))
+	assert.True(t, Contains("d8", paths))
+}
+
+func TestGetDirectUpPaths3(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	g := board.Game{}.InitializeEmptyBoard()
+	g = PlacePiece(p2, "d7", g)
+	np := GetCoordinates(p)
+	paths := GetDirectUpPaths(np, g)
+	assert.Equal(t, 2, len(paths))
 }
 
 func TestGetUpRightPaths(t *testing.T) {
@@ -289,11 +309,53 @@ func TestGetUpRightPaths(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
+
+	g := board.Game{}.InitializeEmptyBoard()
+
 	np := GetCoordinates(p)
-	paths := GetUpRightPaths(np)
+	paths := GetUpRightPaths(np, g)
 	assert.Equal(t, 4, len(paths))
 	assert.True(t, Contains("g7", paths))
+}
 
+func TestGetUpRightPaths2(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+
+	p2 := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	g := board.Game{}.InitializeEmptyBoard()
+	g = PlacePiece(p2, "g7", g)
+	np := GetCoordinates(p)
+	paths := GetUpRightPaths(np, g)
+	assert.Equal(t, 3, len(paths))
+	assert.True(t, Contains("g7", paths))
+}
+
+func TestGetUpRightPaths3(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	g := board.Game{}.InitializeEmptyBoard()
+	g = PlacePiece(p2, "g7", g)
+	np := GetCoordinates(p)
+	paths := GetUpRightPaths(np, g)
+	assert.Equal(t, 2, len(paths))
+	assert.True(t, Contains("f6", paths))
 }
 
 func TestGetRightPaths(t *testing.T) {
@@ -603,4 +665,40 @@ func TestPlacePiece(t *testing.T) {
 	b := g.InitializeEmptyBoard()
 	newBoard := PlacePiece(p, "a6", b)
 	assert.Equal(t, newBoard.Board[2][0].Name, constants.BLACK_PAWN)
+}
+
+func TestIsSameColor(t *testing.T) {
+	p1 := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+
+	res := IsSameColor(p1.Name, p2.Name)
+
+	assert.Equal(t, false, res)
+}
+
+func TestIsSameColor2(t *testing.T) {
+	p1 := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+
+	p2 := piece.Piece{
+		Name:            constants.BLACK_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+
+	res := IsSameColor(p1.Name, p2.Name)
+
+	assert.Equal(t, true, res)
 }

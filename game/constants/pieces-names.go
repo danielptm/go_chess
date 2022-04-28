@@ -8,7 +8,7 @@ const (
 	BLACK_ROOK   = "♖"
 	BLACK_PAWN   = "♙"
 	WHITE_KING   = "♚"
-	WHITE_QUEEN  = "♛"
+	WHITE_QUEEN  = "♕"
 	WHITE_BISHOP = "♝"
 	WHITE_KNIGHT = "♞"
 	WHITE_ROOK   = "♜"
