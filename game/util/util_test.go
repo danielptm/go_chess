@@ -267,7 +267,6 @@ func TestGetDirectUpPaths(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d4", board)
 	b, p2 = PlacePiece(p2, "d7", b)
-	b.PrintBoard()
 	paths := GetDirectUpPaths(p, b)
 	assert.Equal(t, 3, len(paths))
 	assert.True(t, Contains("d7", paths))
@@ -300,7 +299,6 @@ func TestGetDirectUpPaths3(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d4", board)
 	b, p2 = PlacePiece(p2, "d7", b)
-	b.PrintBoard()
 	paths := GetDirectUpPaths(p, b)
 	assert.Equal(t, 2, len(paths))
 }
@@ -335,7 +333,6 @@ func TestGetUpRightPaths2(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d4", board)
 	b, p2 = PlacePiece(p2, "g7", b)
-	b.PrintBoard()
 	paths := GetUpRightPaths(p, b)
 	assert.Equal(t, 3, len(paths))
 	assert.True(t, Contains("g7", paths))
@@ -356,7 +353,6 @@ func TestGetUpRightPaths3(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d4", board)
 	b, p2 = PlacePiece(p2, "g7", b)
-	b.PrintBoard()
 	paths := GetUpRightPaths(p, b)
 	assert.Equal(t, 2, len(paths))
 	assert.True(t, Contains("f6", paths))
@@ -376,7 +372,6 @@ func TestGetRightPaths(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d4", board)
 	b, p2 = PlacePiece(p2, "g4", b)
-	b.PrintBoard()
 	paths := GetRightPaths(p, b)
 	assert.Equal(t, 3, len(paths))
 }
@@ -395,7 +390,6 @@ func TestGetRightPaths2(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d4", board)
 	b, p2 = PlacePiece(p2, "g4", b)
-	b.PrintBoard()
 	paths := GetRightPaths(p, b)
 	assert.Equal(t, 2, len(paths))
 }
@@ -414,7 +408,6 @@ func TestGetDownRightPaths(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d6", board)
 	b, p2 = PlacePiece(p2, "g3", b)
-	b.PrintBoard()
 	paths := GetDownRightPaths(p, b)
 	assert.Equal(t, 3, len(paths))
 	assert.True(t, Contains("e5", paths))
@@ -436,7 +429,6 @@ func TestGetDownRightPaths2(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	b, p := PlacePiece(p, "d6", board)
 	b, p2 = PlacePiece(p2, "g3", b)
-	b.PrintBoard()
 	paths := GetDownRightPaths(p, b)
 	assert.Equal(t, 2, len(paths))
 }
