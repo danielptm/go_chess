@@ -439,10 +439,37 @@ func TestGetDownPaths(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
+	p2 := piece.Piece{
+		Name:            constants.BLACK_BISHOP,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	board := board.Game{}.InitializeEmptyBoard()
+	b, p := PlacePiece(p, "d6", board)
+	b, p2 = PlacePiece(p2, "d3", b)
 	np := GetCoordinates(p)
-	paths := GetDownPaths(np)
+	paths := GetDownPaths(np, b)
 	assert.Equal(t, 3, len(paths))
-	assert.True(t, Contains("d1", paths))
+	assert.True(t, Contains("d5", paths))
+}
+
+func TestGetDownPaths2(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_QUEEN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.WHITE_BISHOP,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	board := board.Game{}.InitializeEmptyBoard()
+	b, p := PlacePiece(p, "d6", board)
+	b, p2 = PlacePiece(p2, "d3", b)
+	np := GetCoordinates(p)
+	paths := GetDownPaths(np, b)
+	assert.Equal(t, 2, len(paths))
 }
 
 func TestGetDownLeftPaths(t *testing.T) {

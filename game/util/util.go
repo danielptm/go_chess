@@ -254,7 +254,7 @@ func GetQueenPaths(p piece.Piece, b board.Game) []string {
 	paths = append(paths, GetUpRightPaths(p, b)...)
 	paths = append(paths, GetRightPaths(p, b)...)
 	paths = append(paths, GetDownRightPaths(p, b)...)
-	paths = append(paths, GetDownPaths(p)...)
+	paths = append(paths, GetDownPaths(p, b)...)
 	paths = append(paths, GetDownLeftPaths(p)...)
 	paths = append(paths, GetLeftPaths(p)...)
 	paths = append(paths, GetUpLeftPaths(p)...)
@@ -365,12 +365,7 @@ func GetDownRightPaths(p piece.Piece, b board.Game) []string {
 	return paths
 }
 
-//TODO: Take the board as another param. Search the board
-// and find all paths. The furthest path is either the edge of the board
-// or a piece. If the encountered piece is a different suit, then it
-// returns that coordinate as a path. If it is the same suit, then it does not include it
-// Do this for all of the GetPaths functions
-func GetDownPaths(p piece.Piece) []string {
+func GetDownPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 
 	downMax := 7 - p.CurrentY
@@ -379,15 +374,26 @@ func GetDownPaths(p piece.Piece) []string {
 		np := GetCoordinates(p)
 		y, x := DirectDownForSpaces(np.CurrentX, np.CurrentY, i)
 		if IsInbounds(x, y) {
+			if IsSameColor(p.Name, b.Board[y][x].Name) {
+				break
+			}
 			np = piece.Piece{Name: np.Name, CurrentX: x, CurrentY: y}
 			np = GetBoardPosition(np)
 			pos := np.CurrentPosition
 			paths = append(paths, pos)
+			if b.Board[y][x].Name != "" {
+				break
+			}
 		}
 	}
 	return paths
 }
 
+//TODO: Take the board as another param. Search the board
+// and find all paths. The furthest path is either the edge of the board
+// or a piece. If the encountered piece is a different suit, then it
+// returns that coordinate as a path. If it is the same suit, then it does not include it
+// Do this for all of the GetPaths functions
 func GetDownLeftPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 
