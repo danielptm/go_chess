@@ -812,16 +812,16 @@ func TestIsInBounds4(t *testing.T) {
 	assert.Equal(t, false, res)
 }
 
-//func TestPlacePiece(t *testing.T) {
-//	g := board.Game{}
-//	p := piece.Piece{
-//		Name:     constants.BLACK_PAWN,
-//		HasMoved: true,
-//	}
-//	b := g.InitializeEmptyBoard()
-//	newBoard := PlacePiece(p, "a6", b)
-//	assert.Equal(t, newBoard.Board[2][0].Name, constants.BLACK_PAWN)
-//}
+func TestPlacePiece(t *testing.T) {
+	g := board.Game{}
+	p := piece.Piece{
+		Name:     constants.BLACK_PAWN,
+		HasMoved: true,
+	}
+	b := g.InitializeEmptyBoard()
+	newBoard, p := PlacePiece(p, "a6", b)
+	assert.Equal(t, newBoard.Board[2][0].Name, constants.BLACK_PAWN)
+}
 
 func TestIsSameColor(t *testing.T) {
 	p1 := piece.Piece{
