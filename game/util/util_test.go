@@ -211,8 +211,9 @@ func TestGetRookPaths(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	paths := GetRookPaths(np)
+	b := board.Game{}.InitializeEmptyBoard()
+	b, p = PlacePiece(p, "d4", b)
+	paths := GetRookPaths(p, b)
 	assert.Equal(t, 14, len(paths))
 	assert.True(t, Contains("a4", paths))
 }

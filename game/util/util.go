@@ -150,45 +150,12 @@ func GetPawnPaths(p piece.Piece) []string {
 	return paths
 }
 
-func GetRookPaths(p piece.Piece) []string {
+func GetRookPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
-
-	for i := 1; i <= p.CurrentY; i++ {
-		y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, i)
-		if IsInbounds(x, y) {
-			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
-			paths = append(paths, np.CurrentPosition)
-		}
-	}
-
-	maxRight := 7 - p.CurrentX
-	for i := 1; i <= maxRight; i++ {
-		y, x := DirectRightForSpaces(p.CurrentX, p.CurrentY, i)
-		if IsInbounds(x, y) {
-			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
-			paths = append(paths, np.CurrentPosition)
-		}
-	}
-
-	maxDown := 7 - p.CurrentY
-
-	for i := 1; i <= maxDown; i++ {
-		y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, i)
-		if IsInbounds(x, y) {
-			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
-			paths = append(paths, np.CurrentPosition)
-		}
-	}
-
-	maxLeft := p.CurrentX
-
-	for i := 1; i <= maxLeft; i++ {
-		y, x := DirectLeftForSpaces(p.CurrentX, p.CurrentY, i)
-		if IsInbounds(x, y) {
-			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
-			paths = append(paths, np.CurrentPosition)
-		}
-	}
+	paths = append(paths, GetDirectUpPaths(p, b)...)
+	paths = append(paths, GetRightPaths(p, b)...)
+	paths = append(paths, GetDownPaths(p, b)...)
+	paths = append(paths, GetLeftPaths(p, b)...)
 	return paths
 }
 
