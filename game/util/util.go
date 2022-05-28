@@ -130,6 +130,7 @@ func GetBoardPosition(p piece.Piece) piece.Piece {
 	return p
 }
 
+//TODO: Adjust this so it takes board as a param
 func GetPawnPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 
@@ -159,6 +160,7 @@ func GetRookPaths(p piece.Piece, b board.Game) []string {
 	return paths
 }
 
+//TODO: Adjust this so it takes board as a param
 //Does not take into account castling
 func GetKingPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
@@ -452,6 +454,7 @@ func GetBishopPaths(p piece.Piece, g board.Game) []string {
 	return paths
 }
 
+//TODO: Adjust this so it takes board as a param
 func GetKnightPaths(p piece.Piece) []string {
 	paths := make([]string, 0)
 	paths = append(paths, UpBigLeftL(p)...)
