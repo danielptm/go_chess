@@ -130,20 +130,20 @@ func GetBoardPosition(p piece.Piece) piece.Piece {
 	return p
 }
 
-//TODO: Adjust this so it takes board as a param
-func GetPawnPaths(p piece.Piece) []string {
+//TODO: Add test for when there is a piece in the pawns way
+func GetPawnPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 
 	if !p.HasMoved {
 		y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
-		if IsInbounds(x, y) {
+		if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 			paths = append(paths, np.CurrentPosition)
 		}
 	}
 
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
@@ -162,54 +162,56 @@ func GetRookPaths(p piece.Piece, b board.Game) []string {
 
 //TODO: Adjust this so it takes board as a param
 //Does not take into account castling
-func GetKingPaths(p piece.Piece) []string {
+//TODO: Add test for when something is in kings way
+//TODO: Add test for when KING moves into check, should not be able to do this.
+func GetKingPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = UpRightForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = DirectRightForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = DownRightForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = DownLeftForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = DirectLeftForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
 
 	y, x = UpLeftForSpaces(p.CurrentX, p.CurrentY, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
 	}
@@ -455,66 +457,66 @@ func GetBishopPaths(p piece.Piece, g board.Game) []string {
 }
 
 //TODO: Adjust this so it takes board as a param
-func GetKnightPaths(p piece.Piece) []string {
+func GetKnightPaths(p piece.Piece, board board.Game) []string {
 	paths := make([]string, 0)
-	paths = append(paths, UpBigLeftL(p)...)
-	paths = append(paths, UpBigRightL(p)...)
-	paths = append(paths, UpSmallLeftL(p)...)
-	paths = append(paths, UpSmallRightL(p)...)
-	paths = append(paths, RightBigUpL(p)...)
-	paths = append(paths, RightBigDownL(p)...)
-	paths = append(paths, RightSmallUpL(p)...)
-	paths = append(paths, RightSmallDownL(p)...)
-	paths = append(paths, DownBigLeftL(p)...)
-	paths = append(paths, DownBigRightL(p)...)
-	paths = append(paths, DownSmallLeftL(p)...)
-	paths = append(paths, DownSmallRightL(p)...)
-	paths = append(paths, LeftBigUpL(p)...)
-	paths = append(paths, LeftBigDownL(p)...)
-	paths = append(paths, LeftSmallUpL(p)...)
-	paths = append(paths, LeftSmallDownL(p)...)
+	paths = append(paths, UpBigLeftL(p, board)...)
+	paths = append(paths, UpBigRightL(p, board)...)
+	paths = append(paths, UpSmallLeftL(p, board)...)
+	paths = append(paths, UpSmallRightL(p, board)...)
+	paths = append(paths, RightBigUpL(p, board)...)
+	paths = append(paths, RightBigDownL(p, board)...)
+	paths = append(paths, RightSmallUpL(p, board)...)
+	paths = append(paths, RightSmallDownL(p, board)...)
+	paths = append(paths, DownBigLeftL(p, board)...)
+	paths = append(paths, DownBigRightL(p, board)...)
+	paths = append(paths, DownSmallLeftL(p, board)...)
+	paths = append(paths, DownSmallRightL(p, board)...)
+	paths = append(paths, LeftBigUpL(p, board)...)
+	paths = append(paths, LeftBigDownL(p, board)...)
+	paths = append(paths, LeftSmallUpL(p, board)...)
+	paths = append(paths, LeftSmallDownL(p, board)...)
 	return paths
 }
 
 //***
-func UpBigLeftL(p piece.Piece) []string {
+func UpBigLeftL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func UpBigRightL(p piece.Piece) []string {
+func UpBigRightL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func UpSmallLeftL(p piece.Piece) []string {
+func UpSmallLeftL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func UpSmallRightL(p piece.Piece) []string {
+func UpSmallRightL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
@@ -522,44 +524,44 @@ func UpSmallRightL(p piece.Piece) []string {
 }
 
 //***
-func RightBigUpL(p piece.Piece) []string {
+func RightBigUpL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func RightBigDownL(p piece.Piece) []string {
+func RightBigDownL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func RightSmallUpL(p piece.Piece) []string {
+func RightSmallUpL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectRightForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func RightSmallDownL(p piece.Piece) []string {
+func RightSmallDownL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectRightForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
@@ -567,44 +569,44 @@ func RightSmallDownL(p piece.Piece) []string {
 }
 
 //***
-func DownBigLeftL(p piece.Piece) []string {
+func DownBigLeftL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func DownBigRightL(p piece.Piece) []string {
+func DownBigRightL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectRightForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func DownSmallLeftL(p piece.Piece) []string {
+func DownSmallLeftL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func DownSmallRightL(p piece.Piece) []string {
+func DownSmallRightL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectRightForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
@@ -612,44 +614,44 @@ func DownSmallRightL(p piece.Piece) []string {
 }
 
 //***
-func LeftBigUpL(p piece.Piece) []string {
+func LeftBigUpL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func LeftBigDownL(p piece.Piece) []string {
+func LeftBigDownL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	y, x = DirectLeftForSpaces(x, y, 2)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func LeftSmallUpL(p piece.Piece) []string {
+func LeftSmallUpL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}
 	return paths
 }
 
-func LeftSmallDownL(p piece.Piece) []string {
+func LeftSmallDownL(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 	y, x = DirectLeftForSpaces(x, y, 1)
-	if IsInbounds(x, y) {
+	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := piece.Piece{CurrentX: x, CurrentY: y, Name: constants.BLACK_KNIGHT}
 		paths = append(paths, GetBoardPosition(np).CurrentPosition)
 	}

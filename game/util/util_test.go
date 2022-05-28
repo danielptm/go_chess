@@ -186,8 +186,9 @@ func TestGetPawnPaths(t *testing.T) {
 		Name:            constants.BLACK_PAWN,
 		CurrentPosition: "d2",
 	}
-	np := GetCoordinates(p)
-	paths := GetPawnPaths(np)
+	board := board.Game{}.InitializeBoard()
+	board, p = PlacePiece(p, "d2", board)
+	paths := GetPawnPaths(p, board)
 	assert.Equal(t, 2, len(paths))
 	assert.Equal(t, "d4", paths[0])
 	assert.Equal(t, "d3", paths[1])
@@ -199,8 +200,9 @@ func TestGetPawnPaths2(t *testing.T) {
 		CurrentPosition: "d2",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	paths := GetPawnPaths(np)
+	board := board.Game{}.InitializeBoard()
+	board, p = PlacePiece(p, "d2", board)
+	paths := GetPawnPaths(p, board)
 	assert.Equal(t, 1, len(paths))
 	assert.Equal(t, "d3", paths[0])
 }
@@ -220,12 +222,13 @@ func TestGetRookPaths(t *testing.T) {
 
 func TestGetKingPaths(t *testing.T) {
 	p := piece.Piece{
-		Name:            constants.BLACK_KNIGHT,
+		Name:            constants.BLACK_KING,
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	paths := GetKingPaths(np)
+	b := board.Game{}.InitializeEmptyBoard()
+	b, p = PlacePiece(p, "d4", b)
+	paths := GetKingPaths(p, b)
 	assert.Equal(t, 8, len(paths))
 }
 
@@ -593,8 +596,9 @@ func TestUpBigLeftL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := UpBigLeftL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := UpBigLeftL(p, board)
 	assert.Equal(t, "c6", s[0])
 }
 
@@ -604,8 +608,9 @@ func TestUpBigRightL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := UpBigRightL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := UpBigRightL(p, board)
 	assert.Equal(t, "e6", s[0])
 }
 
@@ -615,8 +620,9 @@ func TestUpSmallLeftL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := UpSmallLeftL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := UpSmallLeftL(p, board)
 	assert.Equal(t, "b5", s[0])
 }
 
@@ -626,8 +632,9 @@ func TestUpSmallRightL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := UpSmallRightL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := UpSmallRightL(p, board)
 	assert.Equal(t, "b5", s[0])
 }
 
@@ -637,8 +644,9 @@ func TestRightBigUpL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := RightBigUpL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := RightBigUpL(p, board)
 	assert.Equal(t, "e6", s[0])
 }
 
@@ -648,8 +656,9 @@ func TestRightBigDownL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := RightBigDownL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := RightBigDownL(p, board)
 	assert.Equal(t, "e2", s[0])
 }
 
@@ -659,8 +668,9 @@ func TestRightSmallUpL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := RightSmallUpL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := RightSmallUpL(p, board)
 	assert.Equal(t, "f5", s[0])
 }
 
@@ -670,8 +680,9 @@ func TestRightSmallDownL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := RightSmallDownL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := RightSmallDownL(p, board)
 	assert.Equal(t, "f3", s[0])
 }
 
@@ -681,8 +692,9 @@ func TestDownBigLeftL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := DownBigLeftL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := DownBigLeftL(p, board)
 	assert.Equal(t, "c2", s[0])
 }
 
@@ -692,8 +704,9 @@ func TestDownBigRightL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := DownBigRightL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := DownBigRightL(p, board)
 	assert.Equal(t, "e2", s[0])
 }
 
@@ -703,8 +716,9 @@ func TestDownSmallLeftL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := DownSmallLeftL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := DownSmallLeftL(p, board)
 	assert.Equal(t, "b3", s[0])
 }
 
@@ -714,8 +728,9 @@ func TestDownSmallRightL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := DownSmallRightL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := DownSmallRightL(p, board)
 	assert.Equal(t, "f3", s[0])
 }
 
@@ -725,8 +740,9 @@ func TestLeftBigUpL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := LeftBigUpL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := LeftBigUpL(p, board)
 	assert.Equal(t, "b5", s[0])
 }
 
@@ -736,8 +752,9 @@ func TestLeftBigDownL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := LeftBigDownL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := LeftBigDownL(p, board)
 	assert.Equal(t, "b3", s[0])
 }
 
@@ -747,8 +764,9 @@ func TestLeftSmallUpL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := LeftSmallUpL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := LeftSmallUpL(p, board)
 	assert.Equal(t, "c6", s[0])
 }
 
@@ -758,8 +776,9 @@ func TestLeftSmallDownL(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	s := LeftSmallDownL(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	s := LeftSmallDownL(p, board)
 	assert.Equal(t, "c2", s[0])
 }
 
@@ -769,8 +788,9 @@ func TestGetKnightPaths(t *testing.T) {
 		CurrentPosition: "d4",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	paths := GetKnightPaths(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "d4", board)
+	paths := GetKnightPaths(p, board)
 	assert.Equal(t, 16, len(paths))
 }
 
@@ -780,8 +800,9 @@ func TestGetKnightPathsWithSomeInvalid(t *testing.T) {
 		CurrentPosition: "g6",
 		HasMoved:        true,
 	}
-	np := GetCoordinates(p)
-	paths := GetKnightPaths(np)
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "g6", board)
+	paths := GetKnightPaths(p, board)
 	assert.Equal(t, 13, len(paths))
 }
 

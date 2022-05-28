@@ -24,7 +24,7 @@ func ComputerDecides(board board.Game) (string, error) {
 	for i := 0; i < len(board.Board[0]); i++ {
 		for j := 0; j < len(board.Board[1]); j++ {
 			if board.Board[i][j].Name == constants.BLACK_KING {
-				kingMoves = util.GetKingPaths(board.Board[i][j])
+				kingMoves = util.GetKingPaths(board.Board[i][j], board)
 			}
 			if board.Board[i][j].Name == constants.BLACK_QUEEN {
 				queenMoves = util.GetQueenPaths(board.Board[i][j], board)
@@ -35,14 +35,14 @@ func ComputerDecides(board board.Game) (string, error) {
 
 			}
 			if board.Board[i][j].Name == constants.BLACK_KNIGHT {
-				knightMoves = util.GetKingPaths(board.Board[i][j])
+				knightMoves = util.GetKingPaths(board.Board[i][j], board)
 
 			}
 			if board.Board[i][j].Name == constants.BLACK_ROOK {
-				rookMoves = util.GetKingPaths(board.Board[i][j])
+				rookMoves = util.GetKingPaths(board.Board[i][j], board)
 			}
 			if board.Board[i][j].Name == constants.BLACK_PAWN {
-				pawnMoves = util.GetKingPaths(board.Board[i][j])
+				pawnMoves = util.GetKingPaths(board.Board[i][j], board)
 			}
 		}
 	}
