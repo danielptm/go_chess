@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func testComputerDecides(t *testing.T) {
+func TestComputerDecides(t *testing.T) {
 
 	board := board.Game{}.InitializeBoard()
 
@@ -18,10 +18,10 @@ func testComputerDecides(t *testing.T) {
 		total += len(v)
 	}
 
-	assert.Equal(t, 20, total)
+	assert.Equal(t, 24, total)
 	assert.True(t, strings.Contains(res[0][0], "knight"))
-	assert.True(t, strings.Contains(res[0][0], "knight"))
-	assert.True(t, strings.Contains(res[0][0], "pawn"))
+	assert.True(t, strings.Contains(res[1][0], "knight"))
+	assert.True(t, strings.Contains(res[2][0], "pawn"))
 }
 
 func testChooseRandomMoveForRandomPiece(t *testing.T) {

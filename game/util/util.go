@@ -133,16 +133,24 @@ func GetBoardPosition(p piece.Piece) piece.Piece {
 //TODO: Add test for when there is a piece in the pawns way
 func GetPawnPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
-
+	y, x := -1, -1
 	if !p.HasMoved {
-		y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
+		if strings.Contains(p.Name, "black") {
+			y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
+		} else {
+			y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
+		}
 		if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 			paths = append(paths, np.CurrentPosition)
 		}
 	}
 
-	y, x := DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
+	if strings.Contains(p.Name, "black") {
+		y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
+	} else {
+		y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
+	}
 	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
