@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go_chess/game/constants"
 	"go_chess/game/piece"
+	"strings"
 )
 
 type Game struct {
@@ -49,7 +50,61 @@ func (g Game) InitializeBoard() Game {
 			piece.Piece{Name: constants.WHITE_KNIGHT, CurrentPosition: "g1"},
 			piece.Piece{Name: constants.WHITE_ROOK, CurrentPosition: "h1"}},
 	}
+
+	for i, _ := range g.Board {
+		for j, _ := range g.Board[i] {
+			if g.Board[i][j].Name != "" {
+				p := GetCoordinates(g.Board[i][j])
+				g.Board[i][j] = p
+
+			}
+		}
+	}
+
 	return g
+}
+
+//TODO: This is duplicate code from util... Due to circle dep, had to put it here.
+func GetCoordinates(p piece.Piece) piece.Piece {
+	split := strings.Split(p.CurrentPosition, "")
+
+	switch split[0] {
+	case "a":
+		p.CurrentX = 0
+	case "b":
+		p.CurrentX = 1
+	case "c":
+		p.CurrentX = 2
+	case "d":
+		p.CurrentX = 3
+	case "e":
+		p.CurrentX = 4
+	case "f":
+		p.CurrentX = 5
+	case "g":
+		p.CurrentX = 6
+	case "h":
+		p.CurrentX = 7
+	}
+	switch split[1] {
+	case "8":
+		p.CurrentY = 0
+	case "7":
+		p.CurrentY = 1
+	case "6":
+		p.CurrentY = 2
+	case "5":
+		p.CurrentY = 3
+	case "4":
+		p.CurrentY = 4
+	case "3":
+		p.CurrentY = 5
+	case "2":
+		p.CurrentY = 6
+	case "1":
+		p.CurrentY = 7
+	}
+	return p
 }
 
 func (g Game) InitializeEmptyBoard() Game {

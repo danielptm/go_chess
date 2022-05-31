@@ -710,6 +710,16 @@ func TestDownBigRightL(t *testing.T) {
 	assert.Equal(t, "e2", s[0])
 }
 
+func TestDownBigRightL2(t *testing.T) {
+	board := board.Game{}.InitializeBoard()
+	p := GetPieceFromPosition("b8", board)
+	s := DownBigRightL(p, board)
+	np := GetPieceFromPosition("b8", board)
+	s2 := DownBigLeftL(np, board)
+	assert.Equal(t, "c6", s[0])
+	assert.Equal(t, "a6", s2[0])
+}
+
 func TestDownSmallLeftL(t *testing.T) {
 	p := piece.Piece{
 		Name:            constants.WHITE_QUEEN,
@@ -794,12 +804,14 @@ func TestGetKnightPaths(t *testing.T) {
 	assert.Equal(t, 16, len(paths))
 }
 
-//TODO Write a test for calculating number of opening moves for black knights on fresh board.
-func testGetKnightPaths2(t *testing.T) {
-	//This should be the result of the function call.
-	res := 3
-	assert.Equal(t, 4, res)
-
+//TODO: Fails for some reason
+func TestGetKnightPaths2(t *testing.T) {
+	board := board.Game{}.InitializeBoard()
+	p := GetPieceFromPosition("b7", board)
+	moves := GetKnightPaths(p, board)
+	assert.Equal(t, 2, len(moves))
+	assert.True(t, Contains("a6", moves))
+	assert.True(t, Contains("c6", moves))
 }
 
 func TestGetKnightPathsWithSomeInvalid(t *testing.T) {
@@ -887,4 +899,18 @@ func TestIsSameColor2(t *testing.T) {
 	res := IsSameColor(p1.Name, p2.Name)
 
 	assert.Equal(t, true, res)
+}
+
+func TestGetPieceFromPosition(t *testing.T) {
+	p1 := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	board := board.Game{}.InitializeEmptyBoard()
+	board, _ = PlacePiece(p1, "d4", board)
+	np := GetPieceFromPosition("d4", board)
+
+	assert.Equal(t, constants.BLACK_KNIGHT, np.Name)
+
 }

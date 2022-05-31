@@ -160,7 +160,6 @@ func GetRookPaths(p piece.Piece, b board.Game) []string {
 	return paths
 }
 
-//TODO: Adjust this so it takes board as a param
 //Does not take into account castling
 //TODO: Add test for when something is in kings way
 //TODO: Add test for when KING moves into check, should not be able to do this.
@@ -673,8 +672,47 @@ func IsInbounds(x int, y int) bool {
 }
 
 //TODO Get a a piece at the position by giving pram such as "a8"
-func GetPieceFromPosition(pos string, g board.Game) string {
-	return ""
+func GetPieceFromPosition(pos string, g board.Game) piece.Piece {
+	split := strings.Split(pos, "")
+	CurrentX := -1
+	CurrentY := -1
+	switch split[0] {
+	case "a":
+		CurrentX = 0
+	case "b":
+		CurrentX = 1
+	case "c":
+		CurrentX = 2
+	case "d":
+		CurrentX = 3
+	case "e":
+		CurrentX = 4
+	case "f":
+		CurrentX = 5
+	case "g":
+		CurrentX = 6
+	case "h":
+		CurrentX = 7
+	}
+	switch split[1] {
+	case "8":
+		CurrentY = 0
+	case "7":
+		CurrentY = 1
+	case "6":
+		CurrentY = 2
+	case "5":
+		CurrentY = 3
+	case "4":
+		CurrentY = 4
+	case "3":
+		CurrentY = 5
+	case "2":
+		CurrentY = 6
+	case "1":
+		CurrentY = 7
+	}
+	return g.Board[CurrentY][CurrentX]
 }
 
 func IsSameColor(p1Name string, p2Name string) bool {
