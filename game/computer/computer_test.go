@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestComputerDecides(t *testing.T) {
+func testComputerDecides(t *testing.T) {
 
 	board := board.Game{}.InitializeBoard()
 
@@ -24,7 +24,7 @@ func TestComputerDecides(t *testing.T) {
 	assert.True(t, strings.Contains(res[0][0], "pawn"))
 }
 
-func TestChooseRandomMoveForRandomPiece(t *testing.T) {
+func testChooseRandomMoveForRandomPiece(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 
 	responses := make([]string, 0)

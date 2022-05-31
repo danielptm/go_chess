@@ -794,6 +794,14 @@ func TestGetKnightPaths(t *testing.T) {
 	assert.Equal(t, 16, len(paths))
 }
 
+//TODO Write a test for calculating number of opening moves for black knights on fresh board.
+func testGetKnightPaths2(t *testing.T) {
+	//This should be the result of the function call.
+	res := 3
+	assert.Equal(t, 4, res)
+
+}
+
 func TestGetKnightPathsWithSomeInvalid(t *testing.T) {
 	p := piece.Piece{
 		Name:            constants.BLACK_KNIGHT,

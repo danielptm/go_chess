@@ -456,7 +456,6 @@ func GetBishopPaths(p piece.Piece, g board.Game) []string {
 	return paths
 }
 
-//TODO: Adjust this so it takes board as a param
 func GetKnightPaths(p piece.Piece, board board.Game) []string {
 	paths := make([]string, 0)
 	paths = append(paths, UpBigLeftL(p, board)...)
@@ -671,6 +670,11 @@ func IsInbounds(x int, y int) bool {
 		return true
 	}
 	return false
+}
+
+//TODO Get a a piece at the position by giving pram such as "a8"
+func GetPieceFromPosition(pos string, g board.Game) string {
+	return ""
 }
 
 func IsSameColor(p1Name string, p2Name string) bool {

@@ -46,6 +46,6 @@ func PlayerMoves() (string, error) {
 }
 
 func ComputerMoves(game board.Game) {
-	move, _ := computer.ComputerDecidesRandomly(game)
+	move := computer.ComputerRandomlyDecides(game)
 	println("Computer makes move: " + move)
 }
