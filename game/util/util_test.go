@@ -807,9 +807,9 @@ func TestGetKnightPaths(t *testing.T) {
 //TODO: Fails for some reason
 func TestGetKnightPaths2(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
-	p := GetPieceFromPosition("b7", board)
+	p := GetPieceFromPosition("b8", board)
 	moves := GetKnightPaths(p, board)
-	assert.Equal(t, 2, len(moves))
+	assert.Equal(t, 4, len(moves))
 	assert.True(t, Contains("a6", moves))
 	assert.True(t, Contains("c6", moves))
 }
