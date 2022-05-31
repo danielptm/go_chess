@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"go_chess/game/board"
+	"go_chess/game/computer"
 	"os"
 )
 
@@ -34,7 +35,7 @@ func Run(game board.Game) {
 		println("Your move:")
 		println("")
 		PlayerMoves()
-		ComputerMoves()
+		ComputerMoves(game)
 	}
 }
 
@@ -44,10 +45,7 @@ func PlayerMoves() (string, error) {
 	return res, err
 }
 
-func ComputerMoves() string {
-	move := "move"
-	println("")
-	fmt.Printf("Computer'spa move: %s", move)
-	println("")
-	return "move"
+func ComputerMoves(game board.Game) {
+	move, _ := computer.ComputerDecidesRandomly(game)
+	println("Computer makes move: " + move)
 }
