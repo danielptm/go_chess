@@ -904,5 +904,14 @@ func TestGetPieceFromPosition(t *testing.T) {
 	np := GetPieceFromPosition("d4", board)
 
 	assert.Equal(t, constants.BLACK_KNIGHT, np.Name)
+}
 
+func TestPlayMove(t *testing.T) {
+	b := board.Game{}.InitializeBoard()
+	move := "pawn:c7:c6"
+	b = PlayMove(move, b)
+	newc7 := GetPieceFromPosition("c7", b)
+	newc6 := GetPieceFromPosition("c6", b)
+	assert.Equal(t, "", newc7.Name)
+	assert.Equal(t, constants.BLACK_PAWN, newc6.Name)
 }

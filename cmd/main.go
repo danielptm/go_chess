@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go_chess/game/board"
 	"go_chess/game/computer"
+	"go_chess/game/util"
 	"os"
 )
 
@@ -34,18 +35,21 @@ func Run(game board.Game) {
 		println("")
 		println("Your move:")
 		println("")
-		PlayerMoves()
-		ComputerMoves(game)
+		game = PlayerMoves(game)
+		game = ComputerMoves(game)
 	}
 }
 
-func PlayerMoves() (string, error) {
+func PlayerMoves(b board.Game) board.Game {
 	reader := bufio.NewReader(os.Stdin)
-	res, err := reader.ReadString('\n')
-	return res, err
+	res, _ := reader.ReadString('\n')
+	b = util.PlayMove(res, b)
+	return b
 }
 
-func ComputerMoves(game board.Game) {
-	move := computer.ComputerRandomlyDecides(game)
+func ComputerMoves(b board.Game) board.Game {
+	move := computer.ComputerRandomlyDecides(b)
+	b = util.PlayMove(move, b)
 	println("Computer makes move: " + move)
+	return b
 }

@@ -719,6 +719,14 @@ func GetPieceFromPosition(pos string, g board.Game) piece.Piece {
 	return g.Board[CurrentY][CurrentX]
 }
 
+func PlayMove(move string, b board.Game) board.Game {
+	moveBits := strings.Split(move, ":")
+	p := GetPieceFromPosition(moveBits[1], b)
+	b, _ = PlacePiece(piece.Piece{}, moveBits[1], b)
+	b, _ = PlacePiece(p, moveBits[2], b)
+	return b
+}
+
 func IsSameColor(p1Name string, p2Name string) bool {
 	whites := []string{constants.WHITE_PAWN, constants.WHITE_ROOK, constants.WHITE_KNIGHT, constants.WHITE_BISHOP, constants.WHITE_QUEEN, constants.WHITE_KING}
 	blacks := []string{constants.BLACK_PAWN, constants.BLACK_ROOK, constants.BLACK_KNIGHT, constants.BLACK_BISHOP, constants.BLACK_QUEEN, constants.BLACK_KING}
