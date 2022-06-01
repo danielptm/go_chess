@@ -135,9 +135,7 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := -1, -1
 	if !p.HasMoved {
-		if strings.Contains(p.Name, "black") {
-			y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
-		} else {
+		if p.Name == constants.BLACK_PAWN {
 			y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 		}
 		if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
@@ -146,9 +144,7 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 		}
 	}
 
-	if strings.Contains(p.Name, "black") {
-		y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
-	} else {
+	if p.Name == constants.BLACK_PAWN {
 		y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
 	}
 	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {

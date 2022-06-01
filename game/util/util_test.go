@@ -182,29 +182,21 @@ func TestDownLeftForSpaces(t *testing.T) {
 }
 
 func TestGetPawnPaths(t *testing.T) {
-	p := piece.Piece{
-		Name:            constants.BLACK_PAWN,
-		CurrentPosition: "d2",
-	}
 	board := board.Game{}.InitializeBoard()
-	board, p = PlacePiece(p, "d2", board)
+	p := GetPieceFromPosition("c7", board)
 	paths := GetPawnPaths(p, board)
 	assert.Equal(t, 2, len(paths))
-	assert.Equal(t, "d4", paths[0])
-	assert.Equal(t, "d3", paths[1])
+	assert.Equal(t, "c5", paths[0])
+	assert.Equal(t, "c6", paths[1])
 }
 
 func TestGetPawnPaths2(t *testing.T) {
-	p := piece.Piece{
-		Name:            constants.BLACK_PAWN,
-		CurrentPosition: "d2",
-		HasMoved:        true,
-	}
 	board := board.Game{}.InitializeBoard()
-	board, p = PlacePiece(p, "d2", board)
+	p := GetPieceFromPosition("c7", board)
+	p.HasMoved = true
 	paths := GetPawnPaths(p, board)
 	assert.Equal(t, 1, len(paths))
-	assert.Equal(t, "d3", paths[0])
+	assert.Equal(t, "c6", paths[0])
 }
 
 func TestGetRookPaths(t *testing.T) {
