@@ -3,11 +3,12 @@ package computer
 import (
 	"github.com/stretchr/testify/assert"
 	"go_chess/game/board"
+	"go_chess/game/util"
 	"strings"
 	"testing"
 )
 
-func TestComputerDecides(t *testing.T) {
+func TestGenerateMoves(t *testing.T) {
 
 	board := board.Game{}.InitializeBoard()
 
@@ -19,34 +20,22 @@ func TestComputerDecides(t *testing.T) {
 	}
 
 	assert.Equal(t, 24, total)
-	assert.True(t, strings.Contains(res[0][0], "knight"))
-	assert.True(t, strings.Contains(res[1][0], "knight"))
-	assert.True(t, strings.Contains(res[2][0], "pawn"))
+	assert.True(t, strings.Contains(res[3][0], "knight"))
+	assert.True(t, strings.Contains(res[5][0], "pawn"))
 }
 
-func testChooseRandomMoveForRandomPiece(t *testing.T) {
+func TestChooseRandomMoveForRandomPiece(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
+	p := util.GetPieceFromPosition("c7", board)
+	board, p = util.PlacePiece(p, "c6", board)
+	options, _ := generateMoves(board)
 
-	responses := make([]string, 0)
+	p = util.GetPieceFromPosition("f7", board)
+	board, p = util.PlacePiece(p, "f6", board)
 
-	for i := 0; i < 100; i++ {
-		res, _ := generateMoves(board)
-		choice, _ := chooseRandomMoveForRandomPiece(res)
-		responses = append(responses, choice)
-	}
-
-	first := responses[0]
-
-	areDifferent := false
-
-	for _, v := range responses {
-		if v == first {
-			areDifferent = false
-		} else {
-			areDifferent = true
-			break
-		}
-	}
-
-	assert.True(t, areDifferent)
+	options, _ = generateMoves(board)
+	choice, _ := chooseRandomMoveForRandomPiece(options)
+	assert.True(t, choice != "-99")
+	parts := strings.Split(choice, ":")
+	assert.Equal(t, 3, len(parts))
 }

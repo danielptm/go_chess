@@ -25,7 +25,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 	rookOptions := make([]string, 0)
 	pawnOptions := make([]string, 0)
 
-	allMoves := make([][]string, 0)
+	allMoves := [][]string{kingOptions, queenOptions, bishopOptions, knightOptions, rookOptions, pawnOptions}
 
 	for i := 0; i < len(board.Board[0]); i++ {
 		for j := 0; j < len(board.Board[1]); j++ {
@@ -37,7 +37,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 					kingMoves = append(kingMoves, s)
 				}
 				if len(kingMoves) > 0 {
-					allMoves = append(allMoves, kingMoves)
+					allMoves[0] = append(allMoves[0], kingMoves...)
 				}
 			}
 			if board.Board[i][j].Name == constants.BLACK_QUEEN {
@@ -48,7 +48,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 					queenMoves = append(queenMoves, s)
 				}
 				if len(queenMoves) > 0 {
-					allMoves = append(allMoves, queenMoves)
+					allMoves[1] = append(allMoves[1], queenMoves...)
 				}
 			}
 			if board.Board[i][j].Name == constants.BLACK_BISHOP {
@@ -59,7 +59,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 					bishopMoves = append(bishopMoves, s)
 				}
 				if len(bishopMoves) > 0 {
-					allMoves = append(allMoves, bishopMoves)
+					allMoves[2] = append(allMoves[2], bishopMoves...)
 				}
 			}
 			if board.Board[i][j].Name == constants.BLACK_KNIGHT {
@@ -70,7 +70,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 					knightMoves = append(knightMoves, s)
 				}
 				if len(knightMoves) > 0 {
-					allMoves = append(allMoves, knightMoves)
+					allMoves[3] = append(allMoves[3], knightMoves...)
 				}
 			}
 			if board.Board[i][j].Name == constants.BLACK_ROOK {
@@ -81,7 +81,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 					rookMoves = append(rookMoves, s)
 				}
 				if len(rookMoves) > 0 {
-					allMoves = append(allMoves, rookMoves)
+					allMoves[4] = append(allMoves[4], rookMoves...)
 				}
 			}
 			if board.Board[i][j].Name == constants.BLACK_PAWN {
@@ -92,7 +92,7 @@ func generateMoves(board board.Game) ([][]string, error) {
 					pawnMoves = append(pawnMoves, s)
 				}
 				if len(pawnMoves) > 0 {
-					allMoves = append(allMoves, pawnMoves)
+					allMoves[5] = append(allMoves[5], pawnMoves...)
 				}
 			}
 		}
@@ -100,12 +100,19 @@ func generateMoves(board board.Game) ([][]string, error) {
 	return allMoves, nil
 }
 
-func chooseRandomMoveForRandomPiece(allMoves [][]string) (string, error) {
+//TODO: This fails sometimes because it will send in an array allMoves that has a length greater than 5
+func chooseRandomMoveForRandomPiece(a [][]string) (string, error) {
+	allMoves := make([][]string, 0)
+	for _, v := range a {
+		if len(v) > 0 {
+			allMoves = append(allMoves, v)
+		}
+	}
 	source := rand.NewSource(time.Now().UnixNano())
 	rand := rand.New(source)
 
 	max := len(allMoves)
-	pieceR := rand.Intn(max)
+	pieceR := rand.Intn(max - 1)
 
 	switch pieceR {
 	case 0:

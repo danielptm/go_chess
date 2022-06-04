@@ -49,7 +49,7 @@ func PlayerMoves(b board.Game) board.Game {
 
 func ComputerMoves(b board.Game) board.Game {
 	move := computer.ComputerRandomlyDecides(b)
-	b = util.PlayMove(move, b)
 	println("Computer makes move: " + move)
+	b = util.PlayMove(move, b)
 	return b
 }
