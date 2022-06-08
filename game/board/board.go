@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+//TODO: Add a cache to the game. It should be an array. This cache should store
+// The pieces that are taken during the game.
 type Game struct {
 	Board [8][8]piece.Piece
 }
