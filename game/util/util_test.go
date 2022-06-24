@@ -5,6 +5,7 @@ import (
 	"go_chess/game/board"
 	"go_chess/game/constants"
 	"go_chess/game/piece"
+	"strings"
 	"testing"
 )
 
@@ -926,4 +927,20 @@ func TestTakePiece(t *testing.T) {
 	res2 := GetPieceFromPosition("b7", b)
 	assert.Equal(t, p.Name, res.Name)
 	assert.Equal(t, "", res2.Name)
+}
+
+func TestGenerateMoves(t *testing.T) {
+
+	board := board.Game{}.InitializeBoard()
+
+	res, _ := GenerateMoves(true, board)
+	total := 0
+
+	for _, v := range res {
+		total += len(v)
+	}
+
+	assert.Equal(t, 24, total)
+	assert.True(t, strings.Contains(res[3][0], "knight"))
+	assert.True(t, strings.Contains(res[5][0], "pawn"))
 }

@@ -755,4 +755,120 @@ func TakePiece(pos string, p piece.Piece, b board.Game) board.Game {
 	return b
 }
 
+//TODO: Add better unit test for this
+func GenerateMoves(isBlack bool, board board.Game) ([][]string, error) {
+
+	kingOptions := make([]string, 0)
+	queenOptions := make([]string, 0)
+	bishopOptions := make([]string, 0)
+	knightOptions := make([]string, 0)
+	rookOptions := make([]string, 0)
+	pawnOptions := make([]string, 0)
+
+	allMoves := [][]string{kingOptions, queenOptions, bishopOptions, knightOptions, rookOptions, pawnOptions}
+
+	for i := 0; i < len(board.Board[0]); i++ {
+		for j := 0; j < len(board.Board[1]); j++ {
+			piece := ""
+			if isBlack {
+				piece = constants.BLACK_KING
+			} else {
+				piece = constants.WHITE_KING
+			}
+			if board.Board[i][j].Name == piece {
+				kingOptions = GetKingPaths(board.Board[i][j], board)
+				kingMoves := make([]string, 0)
+				for _, v := range kingOptions {
+					s := "king:" + board.Board[i][j].CurrentPosition + ":" + v
+					kingMoves = append(kingMoves, s)
+				}
+				if len(kingMoves) > 0 {
+					allMoves[0] = append(allMoves[0], kingMoves...)
+				}
+			}
+			if isBlack {
+				piece = constants.BLACK_QUEEN
+			} else {
+				piece = constants.WHITE_QUEEN
+			}
+			if board.Board[i][j].Name == piece {
+				queenOptions = GetQueenPaths(board.Board[i][j], board)
+				queenMoves := make([]string, 0)
+				for _, v := range queenOptions {
+					s := "queen:" + board.Board[i][j].CurrentPosition + ":" + v
+					queenMoves = append(queenMoves, s)
+				}
+				if len(queenMoves) > 0 {
+					allMoves[1] = append(allMoves[1], queenMoves...)
+				}
+			}
+			if isBlack {
+				piece = constants.BLACK_BISHOP
+			} else {
+				piece = constants.WHITE_BISHOP
+			}
+			if board.Board[i][j].Name == piece {
+				bishopOptions = GetBishopPaths(board.Board[i][j], board)
+				bishopMoves := make([]string, 0)
+				for _, v := range bishopOptions {
+					s := "bishop:" + board.Board[i][j].CurrentPosition + ":" + v
+					bishopMoves = append(bishopMoves, s)
+				}
+				if len(bishopMoves) > 0 {
+					allMoves[2] = append(allMoves[2], bishopMoves...)
+				}
+			}
+			if isBlack {
+				piece = constants.BLACK_KNIGHT
+			} else {
+				piece = constants.WHITE_KNIGHT
+			}
+			if board.Board[i][j].Name == piece {
+				knightOptions = GetKnightPaths(board.Board[i][j], board)
+				knightMoves := make([]string, 0)
+				for _, v := range knightOptions {
+					s := "knight:" + board.Board[i][j].CurrentPosition + ":" + v
+					knightMoves = append(knightMoves, s)
+				}
+				if len(knightMoves) > 0 {
+					allMoves[3] = append(allMoves[3], knightMoves...)
+				}
+			}
+			if isBlack {
+				piece = constants.BLACK_ROOK
+			} else {
+				piece = constants.WHITE_ROOK
+			}
+			if board.Board[i][j].Name == piece {
+				rookOptions = GetRookPaths(board.Board[i][j], board)
+				rookMoves := make([]string, 0)
+				for _, v := range rookOptions {
+					s := "rook:" + board.Board[i][j].CurrentPosition + ":" + v
+					rookMoves = append(rookMoves, s)
+				}
+				if len(rookMoves) > 0 {
+					allMoves[4] = append(allMoves[4], rookMoves...)
+				}
+			}
+			if isBlack {
+				piece = constants.BLACK_PAWN
+			} else {
+				piece = constants.WHITE_PAWN
+			}
+			if board.Board[i][j].Name == piece {
+				pawnOptions = GetPawnPaths(board.Board[i][j], board)
+				pawnMoves := make([]string, 0)
+				for _, v := range pawnOptions {
+					s := "pawn:" + board.Board[i][j].CurrentPosition + ":" + v
+					pawnMoves = append(pawnMoves, s)
+				}
+				if len(pawnMoves) > 0 {
+					allMoves[5] = append(allMoves[5], pawnMoves...)
+				}
+			}
+		}
+	}
+	return allMoves, nil
+}
+
 //TODO: Add a function that checks to make sure a move the user inputs is valid.

@@ -8,22 +8,6 @@ import (
 	"testing"
 )
 
-func TestGenerateMoves(t *testing.T) {
-
-	board := board.Game{}.InitializeBoard()
-
-	res, _ := generateMoves(board)
-	total := 0
-
-	for _, v := range res {
-		total += len(v)
-	}
-
-	assert.Equal(t, 24, total)
-	assert.True(t, strings.Contains(res[3][0], "knight"))
-	assert.True(t, strings.Contains(res[5][0], "pawn"))
-}
-
 //TODO: Uncomment this and complete this test
 //func TestGenerateMoves2(t *testing.T) {
 //
@@ -56,12 +40,12 @@ func TestChooseRandomMoveForRandomPiece(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 	p := util.GetPieceFromPosition("c7", board)
 	board, p = util.PlacePiece(p, "c6", board)
-	options, _ := generateMoves(board)
+	options, _ := util.GenerateMoves(true, board)
 
 	p = util.GetPieceFromPosition("f7", board)
 	board, p = util.PlacePiece(p, "f6", board)
 
-	options, _ = generateMoves(board)
+	options, _ = util.GenerateMoves(true, board)
 	choice, _ := chooseRandomMoveForRandomPiece(options)
 	assert.True(t, choice != "-99")
 	parts := strings.Split(choice, ":")
