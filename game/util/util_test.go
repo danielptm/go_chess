@@ -796,7 +796,6 @@ func TestGetKnightPaths(t *testing.T) {
 	assert.Equal(t, 16, len(paths))
 }
 
-//TODO: Fails for some reason
 func TestGetKnightPaths2(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 	p := GetPieceFromPosition("b8", board)
@@ -914,4 +913,17 @@ func TestPlayMove(t *testing.T) {
 	newc6 := GetPieceFromPosition("c6", b)
 	assert.Equal(t, "", newc7.Name)
 	assert.Equal(t, constants.BLACK_PAWN, newc6.Name)
+}
+
+func TestTakePiece(t *testing.T) {
+	b := board.Game{}.InitializeEmptyBoard()
+	p := piece.Piece{Name: constants.BLACK_BISHOP, CurrentPosition: "b7", HasMoved: true}
+	p2 := piece.Piece{Name: constants.WHITE_PAWN, CurrentPosition: "d5", HasMoved: true}
+	b, _ = PlacePiece(p, "b7", b)
+	b, _ = PlacePiece(p2, "d5", b)
+	b = TakePiece("d5", p, b)
+	res := GetPieceFromPosition("d5", b)
+	res2 := GetPieceFromPosition("b7", b)
+	assert.Equal(t, p.Name, res.Name)
+	assert.Equal(t, "", res2.Name)
 }

@@ -747,6 +747,12 @@ func Contains(item string, a []string) bool {
 	return false
 }
 
-//TODO: Add function that removes a piece and places it in the cache.
+func TakePiece(pos string, p piece.Piece, b board.Game) board.Game {
+	taken := GetPieceFromPosition(pos, b)
+	b, _ = PlacePiece(piece.Piece{}, p.CurrentPosition, b)
+	b.Cache = append(b.Cache, taken)
+	b, _ = PlacePiece(p, pos, b)
+	return b
+}
 
 //TODO: Add a function that checks to make sure a move the user inputs is valid.

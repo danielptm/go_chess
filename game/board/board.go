@@ -11,9 +11,11 @@ import (
 // The pieces that are taken during the game.
 type Game struct {
 	Board [8][8]piece.Piece
+	Cache []piece.Piece
 }
 
 func (g Game) InitializeBoard() Game {
+	g.Cache = make([]piece.Piece, 0)
 	g.Board = [8][8]piece.Piece{
 		{piece.Piece{Name: constants.BLACK_ROOK, CurrentPosition: "a8", HasMoved: false},
 			piece.Piece{Name: constants.BLACK_KNIGHT, CurrentPosition: "b8", HasMoved: false},
@@ -110,6 +112,7 @@ func GetCoordinates(p piece.Piece) piece.Piece {
 }
 
 func (g Game) InitializeEmptyBoard() Game {
+	g.Cache = make([]piece.Piece, 0)
 	g.Board = [8][8]piece.Piece{
 		{},
 		{},
