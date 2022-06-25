@@ -138,6 +138,10 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 		if p.Name == constants.BLACK_PAWN {
 			y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
 		}
+		if p.Name == constants.WHITE_PAWN {
+			y, x = DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
+
+		}
 		if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 			paths = append(paths, np.CurrentPosition)
@@ -146,6 +150,9 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 
 	if p.Name == constants.BLACK_PAWN {
 		y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 1)
+	}
+	if p.Name == constants.WHITE_PAWN {
+		y, x = DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	}
 	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
@@ -459,25 +466,121 @@ func GetBishopPaths(p piece.Piece, g board.Game) []string {
 	return paths
 }
 
-//TODO: Add unit test for this with a fresh initialized board.
+//TODO: Produces duplicate paths
 func GetKnightPaths(p piece.Piece, board board.Game) []string {
 	paths := make([]string, 0)
-	paths = append(paths, UpBigLeftL(p, board)...)
-	paths = append(paths, UpBigRightL(p, board)...)
-	paths = append(paths, UpSmallLeftL(p, board)...)
-	paths = append(paths, UpSmallRightL(p, board)...)
-	paths = append(paths, RightBigUpL(p, board)...)
-	paths = append(paths, RightBigDownL(p, board)...)
-	paths = append(paths, RightSmallUpL(p, board)...)
-	paths = append(paths, RightSmallDownL(p, board)...)
-	paths = append(paths, DownBigLeftL(p, board)...)
-	paths = append(paths, DownBigRightL(p, board)...)
-	paths = append(paths, DownSmallLeftL(p, board)...)
-	paths = append(paths, DownSmallRightL(p, board)...)
-	paths = append(paths, LeftBigUpL(p, board)...)
-	paths = append(paths, LeftBigDownL(p, board)...)
-	paths = append(paths, LeftSmallUpL(p, board)...)
-	paths = append(paths, LeftSmallDownL(p, board)...)
+	//paths = append(paths, UpBigLeftL(p, board)...)
+	upBigLeftLPaths := UpBigLeftL(p, board)
+	for _, v := range upBigLeftLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, UpBigRightL(p, board)...)
+	upBigRightLPaths := UpBigRightL(p, board)
+	for _, v := range upBigRightLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, UpSmallLeftL(p, board)...)
+	upSmallLeftLPaths := UpSmallLeftL(p, board)
+	for _, v := range upSmallLeftLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, UpSmallRightL(p, board)...)
+	upSmallRightLPaths := UpSmallRightL(p, board)
+	for _, v := range upSmallRightLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, RightBigUpL(p, board)...)
+	rightBigUpLPaths := RightBigUpL(p, board)
+	for _, v := range rightBigUpLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, RightBigDownL(p, board)...)
+	rightBigDownLPaths := RightBigDownL(p, board)
+	for _, v := range rightBigDownLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, RightSmallUpL(p, board)...)
+	rightSmallUpLPaths := RightSmallUpL(p, board)
+	for _, v := range rightSmallUpLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, RightSmallDownL(p, board)...)
+	rightSmallDownLPaths := RightSmallDownL(p, board)
+	for _, v := range rightSmallDownLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, DownBigLeftL(p, board)...)
+	downBigLeftLPaths := DownBigLeftL(p, board)
+	for _, v := range downBigLeftLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, DownBigRightL(p, board)...)
+	downBigRightLPaths := DownBigRightL(p, board)
+	for _, v := range downBigRightLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, DownSmallLeftL(p, board)...)
+	downSmallLeftLPaths := DownSmallLeftL(p, board)
+	for _, v := range downSmallLeftLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, DownSmallRightL(p, board)...)
+	downSmallRightLPaths := DownSmallRightL(p, board)
+	for _, v := range downSmallRightLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, LeftBigUpL(p, board)...)
+	leftBigUpLPaths := LeftBigUpL(p, board)
+	for _, v := range leftBigUpLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, LeftBigDownL(p, board)...)
+	leftBigDownLPaths := LeftBigDownL(p, board)
+	for _, v := range leftBigDownLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, LeftSmallUpL(p, board)...)
+	leftSmallUpLPaths := LeftSmallUpL(p, board)
+	for _, v := range leftSmallUpLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
+	//paths = append(paths, LeftSmallDownL(p, board)...)
+	leftSmallDownLPaths := LeftSmallDownL(p, board)
+	for _, v := range leftSmallDownLPaths {
+		if !Contains(v, paths) {
+			paths = append(paths, v)
+		}
+	}
 	return paths
 }
 
@@ -873,8 +976,6 @@ func GenerateMoves(isBlack bool, board board.Game) ([][]string, error) {
 	return allMoves, nil
 }
 
-//TODO: Add a function that checks to make sure a move the user inputs is valid.
-//TODO: GenerateMoves gives wrong result because GetKnightPaths is fucked
 func CheckIfHumanMoveIsValid(move string, b board.Game) (bool, error) {
 	allMoves, _ := GenerateMoves(false, b)
 	for _, v := range allMoves {

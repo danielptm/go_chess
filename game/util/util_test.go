@@ -200,6 +200,15 @@ func TestGetPawnPaths2(t *testing.T) {
 	assert.Equal(t, "c6", paths[0])
 }
 
+func TestGetPawnPaths3(t *testing.T) {
+	board := board.Game{}.InitializeBoard()
+	p := GetPieceFromPosition("c2", board)
+	p.HasMoved = true
+	paths := GetPawnPaths(p, board)
+	assert.Equal(t, 1, len(paths))
+	assert.Equal(t, "c3", paths[0])
+}
+
 func TestGetRookPaths(t *testing.T) {
 	p := piece.Piece{
 		Name:            constants.BLACK_ROOK,
@@ -794,14 +803,14 @@ func TestGetKnightPaths(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	board, p = PlacePiece(p, "d4", board)
 	paths := GetKnightPaths(p, board)
-	assert.Equal(t, 16, len(paths))
+	assert.Equal(t, 8, len(paths))
 }
 
 func TestGetKnightPaths2(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 	p := GetPieceFromPosition("b8", board)
 	moves := GetKnightPaths(p, board)
-	assert.Equal(t, 4, len(moves))
+	assert.Equal(t, 2, len(moves))
 	assert.True(t, Contains("a6", moves))
 	assert.True(t, Contains("c6", moves))
 }
@@ -815,7 +824,7 @@ func TestGetKnightPathsWithSomeInvalid(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	board, p = PlacePiece(p, "g6", board)
 	paths := GetKnightPaths(p, board)
-	assert.Equal(t, 13, len(paths))
+	assert.Equal(t, 6, len(paths))
 }
 
 func TestIsInBounds(t *testing.T) {
