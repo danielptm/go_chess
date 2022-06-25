@@ -459,6 +459,7 @@ func GetBishopPaths(p piece.Piece, g board.Game) []string {
 	return paths
 }
 
+//TODO: Add unit test for this with a fresh initialized board.
 func GetKnightPaths(p piece.Piece, board board.Game) []string {
 	paths := make([]string, 0)
 	paths = append(paths, UpBigLeftL(p, board)...)
@@ -832,6 +833,7 @@ func GenerateMoves(isBlack bool, board board.Game) ([][]string, error) {
 				}
 				if len(knightMoves) > 0 {
 					allMoves[3] = append(allMoves[3], knightMoves...)
+					print("1")
 				}
 			}
 			if isBlack {
@@ -872,3 +874,14 @@ func GenerateMoves(isBlack bool, board board.Game) ([][]string, error) {
 }
 
 //TODO: Add a function that checks to make sure a move the user inputs is valid.
+//TODO: GenerateMoves gives wrong result because GetKnightPaths is fucked
+func CheckIfHumanMoveIsValid(move string, b board.Game) (bool, error) {
+	allMoves, _ := GenerateMoves(false, b)
+	for _, v := range allMoves {
+		if Contains(move, v) {
+			return true, nil
+		}
+	}
+
+	return false, nil
+}

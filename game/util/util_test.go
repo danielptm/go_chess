@@ -940,7 +940,15 @@ func TestGenerateMoves(t *testing.T) {
 		total += len(v)
 	}
 
-	assert.Equal(t, 24, total)
+	assert.Equal(t, 20, total)
 	assert.True(t, strings.Contains(res[3][0], "knight"))
 	assert.True(t, strings.Contains(res[5][0], "pawn"))
+}
+
+func TestCheckIfHumanMoveIsValid(t *testing.T) {
+	board := board.Game{}.InitializeBoard()
+
+	res, _ := CheckIfHumanMoveIsValid("pawn:d2:d3", board)
+
+	assert.Equal(t, true, res)
 }
