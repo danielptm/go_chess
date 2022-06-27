@@ -1,6 +1,7 @@
 package util
 
 import (
+	"errors"
 	"go_chess/game/board"
 	"go_chess/game/constants"
 	"go_chess/game/piece"
@@ -983,6 +984,5 @@ func CheckIfHumanMoveIsValid(move string, b board.Game) (bool, error) {
 			return true, nil
 		}
 	}
-
-	return false, nil
+	return false, errors.New("Invalid move input by human player.")
 }

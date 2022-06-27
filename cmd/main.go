@@ -32,18 +32,29 @@ func Run(game board.Game) {
 	winnerFound := false
 	for !winnerFound {
 		game.PrintBoard()
-		println("")
-		println("Your move:")
-		println("")
 		game = PlayerMoves(game)
 		game = ComputerMoves(game)
 	}
 }
 
 func PlayerMoves(b board.Game) board.Game {
-	reader := bufio.NewReader(os.Stdin)
-	res, _ := reader.ReadString('\n')
-	b = util.PlayMove(res, b)
+	isValid := false
+	for !isValid {
+		reader := bufio.NewReader(os.Stdin)
+		println("")
+		println("Your move:")
+		println("")
+		res, _ := reader.ReadString('\n')
+		res = res[0 : len(res)-1]
+		hIsValid, err := util.CheckIfHumanMoveIsValid(res, b)
+		if !hIsValid || err != nil {
+			print("Your move was invalid.")
+			isValid = false
+		} else {
+			isValid = hIsValid
+			b = util.PlayMove(res, b)
+		}
+	}
 	return b
 }
 

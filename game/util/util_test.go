@@ -956,8 +956,6 @@ func TestGenerateMoves(t *testing.T) {
 
 func TestCheckIfHumanMoveIsValid(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
-
 	res, _ := CheckIfHumanMoveIsValid("pawn:d2:d3", board)
-
 	assert.Equal(t, true, res)
 }
