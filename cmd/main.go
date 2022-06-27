@@ -46,6 +46,10 @@ func PlayerMoves(b board.Game) board.Game {
 		println("")
 		res, _ := reader.ReadString('\n')
 		res = res[0 : len(res)-1]
+		if res == "showcache" {
+			b.PrintCache()
+			continue
+		}
 		hIsValid, err := util.CheckIfHumanMoveIsValid(res, b)
 		if !hIsValid || err != nil {
 			print("Your move was invalid.")

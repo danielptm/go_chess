@@ -14,7 +14,6 @@ func ComputerRandomlyDecides(board board.Game) string {
 	return move
 }
 
-//TODO: This fails sometimes because it will send in an array allMoves that has a length greater than 5
 func chooseRandomMoveForRandomPiece(a [][]string) (string, error) {
 	allMoves := make([][]string, 0)
 	for _, v := range a {

@@ -424,11 +424,6 @@ func GetLeftPaths(p piece.Piece, b board.Game) []string {
 	return paths
 }
 
-//TODO: Take the board as another param. Search the board
-// and find all paths. The furthest path is either the edge of the board
-// or a piece. If the encountered piece is a different suit, then it
-// returns that coordinate as a path. If it is the same suit, then it does not include it
-// Do this for all of the GetPaths functions
 func GetUpLeftPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 
@@ -467,7 +462,6 @@ func GetBishopPaths(p piece.Piece, g board.Game) []string {
 	return paths
 }
 
-//TODO: Produces duplicate paths
 func GetKnightPaths(p piece.Piece, board board.Game) []string {
 	paths := make([]string, 0)
 	//paths = append(paths, UpBigLeftL(p, board)...)
@@ -780,7 +774,6 @@ func IsInbounds(x int, y int) bool {
 	return false
 }
 
-//TODO Get a a piece at the position by giving pram such as "a8"
 func GetPieceFromPosition(pos string, g board.Game) piece.Piece {
 	split := strings.Split(pos, "")
 	CurrentX := -1
@@ -824,11 +817,16 @@ func GetPieceFromPosition(pos string, g board.Game) piece.Piece {
 	return g.Board[CurrentY][CurrentX]
 }
 
+//TODO: Improve unit testing
 func PlayMove(move string, b board.Game) board.Game {
 	moveBits := strings.Split(move, ":")
 	p := GetPieceFromPosition(moveBits[1], b)
 	b, _ = PlacePiece(piece.Piece{}, moveBits[1], b)
-	b, _ = PlacePiece(p, moveBits[2], b)
+	if GetPieceFromPosition(moveBits[2], b).Name != "" {
+		b = TakePiece(moveBits[2], p, b)
+	} else {
+		b, _ = PlacePiece(p, moveBits[2], b)
+	}
 	return b
 }
 

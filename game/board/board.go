@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-//TODO: Add a cache to the game. It should be an array. This cache should store
-// The pieces that are taken during the game.
 type Game struct {
 	Board [8][8]piece.Piece
 	Cache []piece.Piece
@@ -124,6 +122,47 @@ func (g Game) InitializeEmptyBoard() Game {
 		{},
 	}
 	return g
+}
+
+func (g Game) PrintCache() {
+	for i := 0; i < len(g.Cache); i++ {
+		if g.Cache[i].Name == constants.WHITE_KING {
+			println("White king")
+		}
+		if g.Cache[i].Name == constants.WHITE_QUEEN {
+			println("White queen")
+		}
+		if g.Cache[i].Name == constants.WHITE_BISHOP {
+			println("White bishop")
+		}
+		if g.Cache[i].Name == constants.WHITE_KNIGHT {
+			println("White knight")
+		}
+		if g.Cache[i].Name == constants.WHITE_ROOK {
+			println("White rook")
+		}
+		if g.Cache[i].Name == constants.WHITE_PAWN {
+			println("White pawn")
+		}
+		if g.Cache[i].Name == constants.BLACK_KING {
+			println("Black king")
+		}
+		if g.Cache[i].Name == constants.BLACK_QUEEN {
+			println("Black queen")
+		}
+		if g.Cache[i].Name == constants.BLACK_BISHOP {
+			println("Black bishop")
+		}
+		if g.Cache[i].Name == constants.BLACK_KNIGHT {
+			println("Black knight")
+		}
+		if g.Cache[i].Name == constants.BLACK_ROOK {
+			println("Black rook")
+		}
+		if g.Cache[i].Name == constants.BLACK_PAWN {
+			println("Black pawn")
+		}
+	}
 }
 
 func (g Game) PrintBoard() {
