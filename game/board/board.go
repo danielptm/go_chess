@@ -126,41 +126,16 @@ func (g Game) InitializeEmptyBoard() Game {
 
 func (g Game) PrintCache() {
 	for i := 0; i < len(g.Cache); i++ {
-		if g.Cache[i].Name == constants.WHITE_KING {
-			println("White king")
-		}
-		if g.Cache[i].Name == constants.WHITE_QUEEN {
-			println("White queen")
-		}
-		if g.Cache[i].Name == constants.WHITE_BISHOP {
-			println("White bishop")
-		}
-		if g.Cache[i].Name == constants.WHITE_KNIGHT {
-			println("White knight")
-		}
-		if g.Cache[i].Name == constants.WHITE_ROOK {
-			println("White rook")
-		}
-		if g.Cache[i].Name == constants.WHITE_PAWN {
-			println("White pawn")
-		}
-		if g.Cache[i].Name == constants.BLACK_KING {
-			println("Black king")
-		}
-		if g.Cache[i].Name == constants.BLACK_QUEEN {
-			println("Black queen")
-		}
-		if g.Cache[i].Name == constants.BLACK_BISHOP {
-			println("Black bishop")
-		}
-		if g.Cache[i].Name == constants.BLACK_KNIGHT {
-			println("Black knight")
-		}
-		if g.Cache[i].Name == constants.BLACK_ROOK {
-			println("Black rook")
-		}
-		if g.Cache[i].Name == constants.BLACK_PAWN {
-			println("Black pawn")
+		println(GetTextForPiece(g.Cache[i]))
+	}
+}
+
+func (g Game) PrintBoardDetail() {
+	for i := 0; i < len(g.Board); i++ {
+		for j := 0; j < len(g.Board[i]); j++ {
+			if g.Board[i][j].Name != "" {
+				println(g.Board[i][j].CurrentPosition + ": " + GetTextForPiece(g.Board[i][j]))
+			}
 		}
 	}
 }
@@ -190,4 +165,44 @@ func (g Game) PrintBoard() {
 	}
 	println("     a   b   c   d   e   f   g   h")
 	println("")
+}
+
+func GetTextForPiece(p piece.Piece) string {
+	if p.Name == constants.WHITE_KING {
+		return "White king"
+	}
+	if p.Name == constants.WHITE_QUEEN {
+		return "White queen"
+	}
+	if p.Name == constants.WHITE_BISHOP {
+		return "White bishop"
+	}
+	if p.Name == constants.WHITE_KNIGHT {
+		return "White knight"
+	}
+	if p.Name == constants.WHITE_ROOK {
+		return "White rook"
+	}
+	if p.Name == constants.WHITE_PAWN {
+		return "White pawn"
+	}
+	if p.Name == constants.BLACK_KING {
+		return "Black king"
+	}
+	if p.Name == constants.BLACK_QUEEN {
+		return "Black queen"
+	}
+	if p.Name == constants.BLACK_BISHOP {
+		return "Black bishop"
+	}
+	if p.Name == constants.BLACK_KNIGHT {
+		return "Black knight"
+	}
+	if p.Name == constants.BLACK_ROOK {
+		return "Black rook"
+	}
+	if p.Name == constants.BLACK_PAWN {
+		return "Black pawn"
+	}
+	return "N/A"
 }
