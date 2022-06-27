@@ -135,15 +135,17 @@ func GetBoardPosition(p piece.Piece) piece.Piece {
 func GetPawnPaths(p piece.Piece, b board.Game) []string {
 	paths := make([]string, 0)
 	y, x := -1, -1
+
 	if !p.HasMoved {
 		if p.Name == constants.BLACK_PAWN {
 			y, x = DirectDownForSpaces(p.CurrentX, p.CurrentY, 2)
+
 		}
 		if p.Name == constants.WHITE_PAWN {
 			y, x = DirectUpForSpaces(p.CurrentX, p.CurrentY, 2)
 
 		}
-		if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
+		if IsInbounds(x, y) && b.Board[y][x].Name == "" {
 			np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 			paths = append(paths, np.CurrentPosition)
 		}
@@ -155,9 +157,34 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 	if p.Name == constants.WHITE_PAWN {
 		y, x = DirectUpForSpaces(p.CurrentX, p.CurrentY, 1)
 	}
-	if IsInbounds(x, y) && !IsSameColor(p.Name, b.Board[y][x].Name) {
+	if IsInbounds(x, y) && b.Board[y][x].Name == "" {
 		np := GetBoardPosition(piece.Piece{CurrentX: x, CurrentY: y})
 		paths = append(paths, np.CurrentPosition)
+	}
+
+	leftTakeX, leftTakeY, rightTakeX, rightTakeY := -1, -1, -1, -1
+	if p.Name == constants.BLACK_PAWN {
+		leftTakeX, leftTakeY = DownLeftForSpaces(p.CurrentX, p.CurrentY, 1)
+		rightTakeX, rightTakeY = DownRightForSpaces(p.CurrentX, p.CurrentY, 1)
+
+	}
+
+	if p.Name == constants.WHITE_PAWN {
+		leftTakeX, leftTakeY = UpLeftForSpaces(p.CurrentX, p.CurrentY, 1)
+		rightTakeX, rightTakeY = UpRightForSpaces(p.CurrentX, p.CurrentY, 1)
+	}
+
+	if IsInbounds(x, y) {
+		lefTakePos := GetBoardPosition(piece.Piece{CurrentX: leftTakeX, CurrentY: leftTakeY})
+		rightTakePos := GetBoardPosition(piece.Piece{CurrentX: rightTakeX, CurrentY: rightTakeY})
+
+		if lefTakePos.Name == "" {
+			paths = append(paths, lefTakePos.CurrentPosition)
+		}
+
+		if rightTakePos.Name == "" {
+			paths = append(paths, rightTakePos.CurrentPosition)
+		}
 	}
 
 	return paths
@@ -982,4 +1009,18 @@ func CheckIfHumanMoveIsValid(move string, b board.Game) (bool, error) {
 		}
 	}
 	return false, errors.New("Invalid move input by human player.")
+}
+
+func IsBlackPlayer(p piece.Piece) bool {
+	if p.Name == constants.BLACK_KING || p.Name == constants.BLACK_QUEEN || p.Name == constants.BLACK_KNIGHT || p.Name == constants.BLACK_BISHOP || p.Name == constants.BLACK_ROOK || p.Name == constants.BLACK_PAWN {
+		return true
+	}
+	return false
+}
+
+func IsEmptySpace(p piece.Piece) bool {
+	if p.Name == "" {
+		return true
+	}
+	return false
 }
