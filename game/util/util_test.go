@@ -915,7 +915,6 @@ func TestGetPieceFromPosition(t *testing.T) {
 	assert.Equal(t, constants.BLACK_KNIGHT, np.Name)
 }
 
-//TODO: Most Important. Improve unit testing for this to test placing and taking pieces
 func TestPlayMove(t *testing.T) {
 	b := board.Game{}.InitializeBoard()
 	move := "pawn:c7:c6"
@@ -924,6 +923,52 @@ func TestPlayMove(t *testing.T) {
 	newc6 := GetPieceFromPosition("c6", b)
 	assert.Equal(t, "", newc7.Name)
 	assert.Equal(t, constants.BLACK_PAWN, newc6.Name)
+}
+
+func TestPlayMove2(t *testing.T) {
+	b := board.Game{}.InitializeEmptyBoard()
+	p := piece.Piece{
+		Name:            constants.BLACK_KNIGHT,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "e3",
+		HasMoved:        true,
+	}
+	b, p = PlacePiece(p, "d4", b)
+	b, p2 = PlacePiece(p2, "e3", b)
+	move := "pawn:e3:d4"
+	b = PlayMove(move, b)
+	newd4 := GetPieceFromPosition("d4", b)
+	newe3 := GetPieceFromPosition("c6", b)
+	assert.Equal(t, constants.WHITE_PAWN, newd4.Name)
+	assert.Equal(t, "", newe3.Name)
+	assert.Equal(t, constants.BLACK_KNIGHT, b.Cache[0].Name)
+}
+
+func TestPlayMove3(t *testing.T) {
+	b := board.Game{}.InitializeEmptyBoard()
+	p := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "f7",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "g6",
+		HasMoved:        true,
+	}
+	b, p = PlacePiece(p, "f7", b)
+	b, p2 = PlacePiece(p2, "g6", b)
+	move := "pawn:g6:f7"
+	b = PlayMove(move, b)
+	newd4 := GetPieceFromPosition("d4", b)
+	newe3 := GetPieceFromPosition("c6", b)
+	assert.Equal(t, constants.WHITE_PAWN, newd4.Name)
+	assert.Equal(t, "", newe3.Name)
+	assert.Equal(t, constants.BLACK_KNIGHT, b.Cache[0].Name)
 }
 
 func TestTakePiece(t *testing.T) {

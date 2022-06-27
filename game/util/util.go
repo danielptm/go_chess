@@ -817,7 +817,6 @@ func GetPieceFromPosition(pos string, g board.Game) piece.Piece {
 	return g.Board[CurrentY][CurrentX]
 }
 
-//TODO: Improve unit testing
 func PlayMove(move string, b board.Game) board.Game {
 	moveBits := strings.Split(move, ":")
 	p := GetPieceFromPosition(moveBits[1], b)

@@ -26,7 +26,7 @@ func Run(game board.Game) {
 	println("***")
 	println("Please enter your moves in the format: <piece>:<start position>:<end position>")
 	println("example: pawn:a2:a4")
-	println("You can also type showcache to see removed pieces or showdetails to see a text description of the board.")
+	println("You can also type showcache to see removed pieces or showdetails to see a text description of the board or showboard to reprint the board")
 	print("Press the 'enter' key to make the move")
 	println("***")
 	println("")
@@ -53,6 +53,10 @@ func PlayerMoves(b board.Game) board.Game {
 		}
 		if res == "showdetail" {
 			b.PrintBoardDetail()
+			continue
+		}
+		if res == "showboard" {
+			b.PrintBoard()
 			continue
 		}
 		hIsValid, err := util.CheckIfHumanMoveIsValid(res, b)
