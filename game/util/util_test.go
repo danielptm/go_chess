@@ -915,6 +915,7 @@ func TestGetPieceFromPosition(t *testing.T) {
 	assert.Equal(t, constants.BLACK_KNIGHT, np.Name)
 }
 
+//TODO: Most Important. Improve unit testing for this to test placing and taking pieces
 func TestPlayMove(t *testing.T) {
 	b := board.Game{}.InitializeBoard()
 	move := "pawn:c7:c6"
