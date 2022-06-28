@@ -174,24 +174,24 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 	}
 
 	if !IsBlackPlayer(p) {
-		if IsInbounds(leftTakeX, leftTakeY) && IsBlackPlayer(b.Board[leftTakeY][leftTakeX]) {
+		if IsInbounds(leftTakeX, leftTakeY) && IsBlackPlayer(b.Board[leftTakeY][leftTakeX]) && !IsEmptySpace(b.Board[leftTakeY][leftTakeX]) {
 			lefTakePos := GetBoardPosition(piece.Piece{CurrentX: leftTakeX, CurrentY: leftTakeY})
 			paths = append(paths, lefTakePos.CurrentPosition)
 		}
 
-		if IsInbounds(rightTakeX, rightTakeY) && IsBlackPlayer(b.Board[rightTakeY][rightTakeX]) {
+		if IsInbounds(rightTakeX, rightTakeY) && IsBlackPlayer(b.Board[rightTakeY][rightTakeX]) && !IsEmptySpace(b.Board[rightTakeY][rightTakeX]) {
 			rightTakePos := GetBoardPosition(piece.Piece{CurrentX: rightTakeX, CurrentY: rightTakeY})
 			paths = append(paths, rightTakePos.CurrentPosition)
 		}
 	}
 
 	if IsBlackPlayer(p) {
-		if IsInbounds(leftTakeX, leftTakeY) && !IsBlackPlayer(b.Board[leftTakeY][leftTakeX]) {
+		if IsInbounds(leftTakeX, leftTakeY) && !IsBlackPlayer(b.Board[leftTakeY][leftTakeX]) && !IsEmptySpace(b.Board[leftTakeY][leftTakeX]) {
 			lefTakePos := GetBoardPosition(piece.Piece{CurrentX: leftTakeX, CurrentY: leftTakeY})
 			paths = append(paths, lefTakePos.CurrentPosition)
 		}
 
-		if IsInbounds(rightTakeX, rightTakeY) && !IsBlackPlayer(b.Board[rightTakeX][rightTakeY]) {
+		if IsInbounds(rightTakeX, rightTakeY) && !IsBlackPlayer(b.Board[rightTakeY][rightTakeX]) && !IsEmptySpace(b.Board[rightTakeY][rightTakeX]) {
 			rightTakePos := GetBoardPosition(piece.Piece{CurrentX: rightTakeX, CurrentY: rightTakeY})
 			paths = append(paths, rightTakePos.CurrentPosition)
 		}

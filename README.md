@@ -16,3 +16,5 @@ go build cmd/main.go
 ```
 ./main
 ```
+##### About this executable
+The executable in this project was built on apple silicon. If you're not on apple silicon you'll have to rebuild.

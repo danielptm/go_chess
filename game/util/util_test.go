@@ -217,7 +217,7 @@ func TestGetPawnPaths4(t *testing.T) {
 	p2.HasMoved = true
 	board, p2 = PlacePiece(p2, "c3", board)
 	paths := GetPawnPaths(p2, board)
-	assert.Equal(t, 0, len(paths))
+	assert.Equal(t, 2, len(paths))
 }
 
 func TestGetPawnPaths5(t *testing.T) {
