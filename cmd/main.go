@@ -36,19 +36,26 @@ func Run(game board.Game) {
 		if util.KingIsInCheck(true, game) {
 			playerWon = util.KingIsCheckMated(true, game)
 			winnerFound = playerWon
-			println("The  human player won! 🎉")
+			println("")
+			println("🎉🎉🎉🎉")
+			println("The  human player won!")
+			println("🎉🎉🎉🎉")
+			println("")
 		} else {
 			game = ComputerMoves(game)
 			if util.KingIsInCheck(false, game) {
 				computerWon := util.KingIsCheckMated(false, game)
 				if computerWon {
 					winnerFound = computerWon
+					println("")
 					println("The  computer player won. 🤖")
+					println("")
 					break
 				}
 			}
 		}
 	}
+	game.PrintBoard()
 	println("")
 	println("****")
 	println("Game over")
