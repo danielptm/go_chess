@@ -12,5 +12,6 @@ func TestInitializeBoard(t *testing.T) {
 
 func TestInitializeBoard2(t *testing.T) {
 	g := Game{}.InitializeBoard()
+	g.PrintBoard()
 	assert.Equal(t, 0, len(g.Cache))
 }

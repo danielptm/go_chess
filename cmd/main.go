@@ -15,10 +15,8 @@ func main() {
 	fmt.Println("Hey! Welcome to my chess game written in GO")
 	fmt.Println("***")
 	fmt.Println("")
-
 	game := new(board.Game).InitializeBoard()
 	Run(game)
-
 }
 
 func Run(game board.Game) {
@@ -42,9 +40,15 @@ func PlayerMoves(b board.Game) board.Game {
 	isValid := false
 	for !isValid {
 		reader := bufio.NewReader(os.Stdin)
-		println("")
-		println("Your move:")
-		println("")
+		if !b.HumanIsInCheck {
+			println("")
+			println("Your move:")
+			println("")
+		} else {
+			println("")
+			println("You're in check and it's your move:")
+			println("")
+		}
 		res, _ := reader.ReadString('\n')
 		res = res[0 : len(res)-1]
 		if res == "showcache" {

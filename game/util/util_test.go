@@ -182,7 +182,6 @@ func TestDownLeftForSpaces(t *testing.T) {
 	assert.Equal(t, "b2", res.CurrentPosition)
 }
 
-//TODO: High Priority. Fix GetPawnPath tests
 func TestGetPawnPaths(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 	p := GetPieceFromPosition("c7", board)
@@ -1054,5 +1053,86 @@ func TestGenerateMoves(t *testing.T) {
 func TestCheckIfHumanMoveIsValid(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 	res, _ := CheckIfHumanMoveIsValid("pawn:d2:d3", board)
+	assert.Equal(t, true, res)
+}
+
+func TestKingIsInCheck(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_BISHOP,
+		CurrentPosition: "f6",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.BLACK_KING,
+		CurrentPosition: "d8",
+		HasMoved:        true,
+	}
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "f6", board)
+	board, p2 = PlacePiece(p2, "d8", board)
+
+	res := KingIsInCheck(p2, board)
+
+	assert.Equal(t, true, res)
+}
+
+func TestKingIsInCheck2(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_BISHOP,
+		CurrentPosition: "f6",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.BLACK_KING,
+		CurrentPosition: "d8",
+		HasMoved:        true,
+	}
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "f6", board)
+	board, p2 = PlacePiece(p2, "f1", board)
+	res := KingIsInCheck(p2, board)
+	assert.Equal(t, false, res)
+}
+
+func TestKingIsCheckMated(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.WHITE_BISHOP,
+		CurrentPosition: "f6",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.BLACK_KING,
+		CurrentPosition: "d8",
+		HasMoved:        true,
+	}
+	p3 := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "c8",
+		HasMoved:        true,
+	}
+	p4 := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "c7",
+		HasMoved:        true,
+	}
+	p5 := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "d7",
+		HasMoved:        true,
+	}
+	p6 := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "e8",
+		HasMoved:        true,
+	}
+	board := board.Game{}.InitializeEmptyBoard()
+	board, p = PlacePiece(p, "f6", board)
+	board, p2 = PlacePiece(p2, "d8", board)
+	board, p3 = PlacePiece(p3, "c8", board)
+	board, p4 = PlacePiece(p4, "c7", board)
+	board, p5 = PlacePiece(p5, "d7", board)
+	board, p6 = PlacePiece(p6, "e8", board)
+	res := KingIsCheckMated(p2, board)
+	//board.PrintBoard()
 	assert.Equal(t, true, res)
 }

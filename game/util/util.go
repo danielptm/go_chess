@@ -1033,3 +1033,63 @@ func IsEmptySpace(p piece.Piece) bool {
 	}
 	return false
 }
+
+// TODO: Write this function
+func KingIsInCheck(p piece.Piece, game board.Game) bool {
+	if p.Name == constants.WHITE_KING {
+		paths, _ := GenerateMoves(true, game)
+		for i := range paths {
+			for j := range paths[i] {
+				if paths[i][j] == p.CurrentPosition {
+					return true
+				}
+			}
+		}
+	} else if p.Name == constants.BLACK_KING {
+		paths, _ := GenerateMoves(false, game)
+		for i := range paths {
+			for j := range paths[i] {
+				curr := strings.Split(paths[i][j], ":")[2]
+				if curr == p.CurrentPosition {
+					return true
+				}
+			}
+		}
+	} else {
+		print("The piece was invalid because it was not a king.")
+	}
+	return false
+}
+
+func KingIsCheckMated(p piece.Piece, game board.Game) bool {
+	if p.Name == constants.WHITE_KING {
+		whiteKingPaths := GetKingPaths(p, game)
+		blackPaths, _ := GenerateMoves(true, game)
+		for i := range blackPaths {
+			for j := range blackPaths[i] {
+				for _, v := range whiteKingPaths {
+					curr := strings.Split(blackPaths[i][j], ":")[2]
+					if curr == v {
+						return true
+					}
+				}
+			}
+		}
+	} else if p.Name == constants.BLACK_KING {
+		blackKingPaths := GetKingPaths(p, game)
+		whitePaths, _ := GenerateMoves(true, game)
+		for i := range whitePaths {
+			for j := range whitePaths[i] {
+				for _, v := range blackKingPaths {
+					curr := strings.Split(whitePaths[i][j], ":")[2]
+					if curr == v {
+						return true
+					}
+				}
+			}
+		}
+	} else {
+		print("The piece was invalid because it was not a king.")
+	}
+	return false
+}

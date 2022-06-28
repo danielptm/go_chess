@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"go_chess/game/constants"
 	"go_chess/game/piece"
+	"strconv"
 	"strings"
 )
 
 type Game struct {
-	Board [8][8]piece.Piece
-	Cache []piece.Piece
+	Board          [8][8]piece.Piece
+	Cache          []piece.Piece
+	HumanIsInCheck bool
 }
 
 func (g Game) InitializeBoard() Game {
@@ -142,6 +144,7 @@ func (g Game) PrintBoardDetail() {
 
 func (g Game) PrintBoard() {
 	fmt.Println("***********   NEXT TURN   ***********")
+	fmt.Println("Human is in check: " + strconv.FormatBool(g.HumanIsInCheck))
 	for i := 0; i < 8; i++ {
 		fmt.Printf(" %d ", (8 - i))
 		print("| ")
