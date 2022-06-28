@@ -220,7 +220,43 @@ func TestGetPawnPaths4(t *testing.T) {
 }
 
 func TestGetPawnPaths5(t *testing.T) {
-	//TODO: Fill this out. It should test that a path option is generated for a piece that a pawn could take.
+	p := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "d4",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "e3",
+		HasMoved:        true,
+	}
+	b := board.Game{}.InitializeEmptyBoard()
+	b, p = PlacePiece(p, "d4", b)
+	b, p2 = PlacePiece(p2, "e3", b)
+	paths := GetPawnPaths(p2, b)
+	assert.Equal(t, 2, len(paths))
+	assert.True(t, Contains("d4", paths))
+	assert.True(t, Contains("e4", paths))
+}
+
+func TestGetPawnPaths6(t *testing.T) {
+	p := piece.Piece{
+		Name:            constants.BLACK_PAWN,
+		CurrentPosition: "f4",
+		HasMoved:        true,
+	}
+	p2 := piece.Piece{
+		Name:            constants.WHITE_PAWN,
+		CurrentPosition: "e3",
+		HasMoved:        true,
+	}
+	b := board.Game{}.InitializeEmptyBoard()
+	b, p = PlacePiece(p, "f4", b)
+	b, p2 = PlacePiece(p2, "e3", b)
+	paths := GetPawnPaths(p2, b)
+	assert.Equal(t, 2, len(paths))
+	assert.True(t, Contains("f4", paths))
+	assert.True(t, Contains("e4", paths))
 }
 
 func TestGetRookPaths(t *testing.T) {

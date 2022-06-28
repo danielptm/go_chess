@@ -164,29 +164,38 @@ func GetPawnPaths(p piece.Piece, b board.Game) []string {
 
 	leftTakeX, leftTakeY, rightTakeX, rightTakeY := -1, -1, -1, -1
 	if p.Name == constants.BLACK_PAWN {
-		leftTakeX, leftTakeY = DownLeftForSpaces(p.CurrentX, p.CurrentY, 1)
-		rightTakeX, rightTakeY = DownRightForSpaces(p.CurrentX, p.CurrentY, 1)
-
+		leftTakeY, leftTakeX = DownLeftForSpaces(p.CurrentX, p.CurrentY, 1)
+		rightTakeY, rightTakeX = DownRightForSpaces(p.CurrentX, p.CurrentY, 1)
 	}
 
 	if p.Name == constants.WHITE_PAWN {
-		leftTakeX, leftTakeY = UpLeftForSpaces(p.CurrentX, p.CurrentY, 1)
-		rightTakeX, rightTakeY = UpRightForSpaces(p.CurrentX, p.CurrentY, 1)
+		leftTakeY, leftTakeX = UpLeftForSpaces(p.CurrentX, p.CurrentY, 1)
+		rightTakeY, rightTakeX = UpRightForSpaces(p.CurrentX, p.CurrentY, 1)
 	}
 
-	if IsInbounds(x, y) {
-		lefTakePos := GetBoardPosition(piece.Piece{CurrentX: leftTakeX, CurrentY: leftTakeY})
-		rightTakePos := GetBoardPosition(piece.Piece{CurrentX: rightTakeX, CurrentY: rightTakeY})
-
-		if lefTakePos.Name == "" {
+	if !IsBlackPlayer(p) {
+		if IsInbounds(leftTakeX, leftTakeY) && IsBlackPlayer(b.Board[leftTakeY][leftTakeX]) {
+			lefTakePos := GetBoardPosition(piece.Piece{CurrentX: leftTakeX, CurrentY: leftTakeY})
 			paths = append(paths, lefTakePos.CurrentPosition)
 		}
 
-		if rightTakePos.Name == "" {
+		if IsInbounds(rightTakeX, rightTakeY) && IsBlackPlayer(b.Board[rightTakeY][rightTakeX]) {
+			rightTakePos := GetBoardPosition(piece.Piece{CurrentX: rightTakeX, CurrentY: rightTakeY})
 			paths = append(paths, rightTakePos.CurrentPosition)
 		}
 	}
 
+	if IsBlackPlayer(p) {
+		if IsInbounds(leftTakeX, leftTakeY) && !IsBlackPlayer(b.Board[leftTakeY][leftTakeX]) {
+			lefTakePos := GetBoardPosition(piece.Piece{CurrentX: leftTakeX, CurrentY: leftTakeY})
+			paths = append(paths, lefTakePos.CurrentPosition)
+		}
+
+		if IsInbounds(rightTakeX, rightTakeY) && !IsBlackPlayer(b.Board[rightTakeX][rightTakeY]) {
+			rightTakePos := GetBoardPosition(piece.Piece{CurrentX: rightTakeX, CurrentY: rightTakeY})
+			paths = append(paths, rightTakePos.CurrentPosition)
+		}
+	}
 	return paths
 }
 
@@ -787,6 +796,7 @@ func LeftSmallDownL(p piece.Piece, b board.Game) []string {
 }
 
 func PlacePiece(p piece.Piece, pos string, g board.Game) (board.Game, piece.Piece) {
+	p.HasMoved = true
 	p.CurrentPosition = pos
 	np := GetCoordinates(p)
 	np = GetBoardPosition(np)
