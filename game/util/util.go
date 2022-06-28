@@ -1035,7 +1035,8 @@ func IsEmptySpace(p piece.Piece) bool {
 }
 
 // TODO: Write this function
-func KingIsInCheck(p piece.Piece, game board.Game) bool {
+func KingIsInCheck(kingIsBlack bool, game board.Game) bool {
+	p, _ := GetKing(kingIsBlack, game)
 	if p.Name == constants.WHITE_KING {
 		paths, _ := GenerateMoves(true, game)
 		for i := range paths {
@@ -1061,7 +1062,8 @@ func KingIsInCheck(p piece.Piece, game board.Game) bool {
 	return false
 }
 
-func KingIsCheckMated(p piece.Piece, game board.Game) bool {
+func KingIsCheckMated(kingIsBlack bool, game board.Game) bool {
+	p, _ := GetKing(kingIsBlack, game)
 	if p.Name == constants.WHITE_KING {
 		whiteKingPaths := GetKingPaths(p, game)
 		blackPaths, _ := GenerateMoves(true, game)
@@ -1092,4 +1094,22 @@ func KingIsCheckMated(p piece.Piece, game board.Game) bool {
 		print("The piece was invalid because it was not a king.")
 	}
 	return false
+}
+
+func GetKing(isBlackKing bool, board board.Game) (piece.Piece, error) {
+	for i := range board.Board {
+		for j := range board.Board[i] {
+			if isBlackKing {
+				if board.Board[i][j].Name == constants.BLACK_KING {
+					return board.Board[i][j], nil
+				}
+			}
+			if !isBlackKing {
+				if board.Board[i][j].Name == constants.WHITE_KING {
+					return board.Board[i][j], nil
+				}
+			}
+		}
+	}
+	return piece.Piece{}, errors.New("Error: Couldnt find the king 😞")
 }

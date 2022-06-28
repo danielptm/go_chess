@@ -1071,7 +1071,7 @@ func TestKingIsInCheck(t *testing.T) {
 	board, p = PlacePiece(p, "f6", board)
 	board, p2 = PlacePiece(p2, "d8", board)
 
-	res := KingIsInCheck(p2, board)
+	res := KingIsInCheck(true, board)
 
 	assert.Equal(t, true, res)
 }
@@ -1090,7 +1090,7 @@ func TestKingIsInCheck2(t *testing.T) {
 	board := board.Game{}.InitializeEmptyBoard()
 	board, p = PlacePiece(p, "f6", board)
 	board, p2 = PlacePiece(p2, "f1", board)
-	res := KingIsInCheck(p2, board)
+	res := KingIsInCheck(true, board)
 	assert.Equal(t, false, res)
 }
 
@@ -1132,7 +1132,7 @@ func TestKingIsCheckMated(t *testing.T) {
 	board, p4 = PlacePiece(p4, "c7", board)
 	board, p5 = PlacePiece(p5, "d7", board)
 	board, p6 = PlacePiece(p6, "e8", board)
-	res := KingIsCheckMated(p2, board)
+	res := KingIsCheckMated(true, board)
 	//board.PrintBoard()
 	assert.Equal(t, true, res)
 }

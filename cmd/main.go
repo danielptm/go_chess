@@ -32,15 +32,36 @@ func Run(game board.Game) {
 	for !winnerFound {
 		game.PrintBoard()
 		game = PlayerMoves(game)
-		game = ComputerMoves(game)
+		playerWon := false
+		if util.KingIsInCheck(true, game) {
+			playerWon = util.KingIsCheckMated(true, game)
+			winnerFound = playerWon
+			println("The  human player won! 🎉")
+		} else {
+			game = ComputerMoves(game)
+			if util.KingIsInCheck(false, game) {
+				computerWon := util.KingIsCheckMated(false, game)
+				if computerWon {
+					winnerFound = computerWon
+					println("The  computer player won. 🤖")
+					break
+				}
+			}
+		}
 	}
+	println("")
+	println("****")
+	println("Game over")
+	println("****")
+	println("")
 }
 
 func PlayerMoves(b board.Game) board.Game {
 	isValid := false
+	humanIsInCheck := util.KingIsInCheck(false, b)
 	for !isValid {
 		reader := bufio.NewReader(os.Stdin)
-		if !b.HumanIsInCheck {
+		if !humanIsInCheck {
 			println("")
 			println("Your move:")
 			println("")
