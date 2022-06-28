@@ -894,7 +894,6 @@ func TakePiece(pos string, p piece.Piece, b board.Game) board.Game {
 	return b
 }
 
-//TODO: Add better unit test for this
 func GenerateMoves(isBlack bool, board board.Game) ([][]string, error) {
 
 	kingOptions := make([]string, 0)

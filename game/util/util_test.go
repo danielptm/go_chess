@@ -182,6 +182,7 @@ func TestDownLeftForSpaces(t *testing.T) {
 	assert.Equal(t, "b2", res.CurrentPosition)
 }
 
+//TODO: High Priority. Fix GetPawnPath tests
 func TestGetPawnPaths(t *testing.T) {
 	board := board.Game{}.InitializeBoard()
 	p := GetPieceFromPosition("c7", board)
@@ -1014,11 +1015,11 @@ func TestPlayMove3(t *testing.T) {
 	b, p2 = PlacePiece(p2, "g6", b)
 	move := "pawn:g6:f7"
 	b = PlayMove(move, b)
-	newd4 := GetPieceFromPosition("d4", b)
-	newe3 := GetPieceFromPosition("c6", b)
-	assert.Equal(t, constants.WHITE_PAWN, newd4.Name)
-	assert.Equal(t, "", newe3.Name)
-	assert.Equal(t, constants.BLACK_KNIGHT, b.Cache[0].Name)
+	newf7 := GetPieceFromPosition("f7", b)
+	newc6 := GetPieceFromPosition("c6", b)
+	assert.Equal(t, constants.WHITE_PAWN, newf7.Name)
+	assert.Equal(t, "", newc6.Name)
+	assert.Equal(t, constants.BLACK_PAWN, b.Cache[0].Name)
 }
 
 func TestTakePiece(t *testing.T) {
