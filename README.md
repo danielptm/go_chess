@@ -1,5 +1,9 @@
 
-## Daniel's Chess game written in GO
+# Daniel's Chess game written in GO
+## Milestones:
+1. MVP: Be able to play a game of chess against a super dumb computer player. ✅
+2. Create smart AI agent.  🌕
+3. Additional features: Game Simulator, Castling, Player can choose to be black/white, can choose difficulty level 🌕
 
 ##### Run all unit tests
 ```go test ./...```
