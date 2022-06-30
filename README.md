@@ -5,6 +5,10 @@
 2. Create AI agent and replace the dumbness with the AI agent. The computer becomes very smart.  🌕
 3. Game Simulator, Castling, Player can choose to be black/white, can choose difficulty level 🌕
 
+##### Go installation
+1. In the terminal after homebrew is installed: ```brew install golang```
+2. Check the version in the terminal by running ```go version```
+
 ##### Run all unit tests
 ```go test ./...```
 
