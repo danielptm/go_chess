@@ -1,7 +1,7 @@
 
 # Daniel's Chess game written in GO
 ## Milestones:
-1. MVP: Be able to play a game of chess against a super dumb computer player. ✅
+1. MVP: Be able to play a game of chess against a super dumb computer player in the terminal. ✅
 2. Create AI agent and replace the dumbness with the AI agent. The computer becomes very smart.  🌕
 3. Create a web socket capability that allows the react app render/communicate with the go game. 🌕
 4. Game Simulator, Castling, Player can choose to be black/white, can choose difficulty level 🌕
