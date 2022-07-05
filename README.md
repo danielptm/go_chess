@@ -3,7 +3,8 @@
 ## Milestones:
 1. MVP: Be able to play a game of chess against a super dumb computer player. ✅
 2. Create AI agent and replace the dumbness with the AI agent. The computer becomes very smart.  🌕
-3. Game Simulator, Castling, Player can choose to be black/white, can choose difficulty level 🌕
+3. Create a web socket capability that allows the react app render/communicate with the go game. 🌕
+4. Game Simulator, Castling, Player can choose to be black/white, can choose difficulty level 🌕
 
 ##### Go installation
 1. In the terminal after homebrew is installed: ```brew install golang```
