@@ -68,6 +68,32 @@ func (g Game) InitializeBoard() Game {
 	return g
 }
 
+func (g Game) InitializeSmallTestBoard() Game {
+	g.Cache = make([]piece.Piece, 0)
+	g.Board = [8][8]piece.Piece{
+		{piece.Piece{Name: constants.BLACK_ROOK, CurrentPosition: "a8", HasMoved: false}},
+		{{}, piece.Piece{Name: constants.BLACK_PAWN, CurrentPosition: "h7", HasMoved: false}},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{{}, piece.Piece{Name: constants.WHITE_KNIGHT, CurrentPosition: "b1", HasMoved: false}},
+	}
+
+	for i, _ := range g.Board {
+		for j, _ := range g.Board[i] {
+			if g.Board[i][j].Name != "" {
+				p := GetCoordinates(g.Board[i][j])
+				g.Board[i][j] = p
+
+			}
+		}
+	}
+
+	return g
+}
+
 //TODO: This is duplicate code from util... Due to circle dep, had to put it here.
 func GetCoordinates(p piece.Piece) piece.Piece {
 	split := strings.Split(p.CurrentPosition, "")
